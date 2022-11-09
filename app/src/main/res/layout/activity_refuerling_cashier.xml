@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="memberBean"
+            type="com.tx.zygj.bean.MemberManageBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_F5F5F6">
+
+        <ImageView
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="226dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_home"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.llx.common.custom.TitleBarView
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="37dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="加油收银" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout19"
+            app:layout_constraintTop_toBottomOf="@+id/titleBar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/search"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fillet_ffffff_4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/icon_search"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/editText"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="16dp"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:text="输入想查找的会员"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toStartOf="@+id/view"
+                        app:layout_constraintStart_toEndOf="@+id/imageView4" />
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@color/color_5F5F5F"
+                        app:layout_constraintEnd_toStartOf="@+id/textView11" />
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="搜索"
+                        android:textColor="@color/color_5F5F5F"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/mantle"
+                    android:layout_width="match_parent"
+                    android:layout_height="91dp"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="17dp"
+                    android:background="@drawable/fillet_ffffff_4"
+                    android:gravity="center"
+                    android:text="请选择会员"
+                    android:textColor="@color/color_3D4255"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/member"
+                    setMemberBg2="@{memberBean.memberType}"
+                    android:layout_width="match_parent"
+                    android:layout_height="91dp"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="17dp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                    <TextView
+                        android:id="@+id/member_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="17dp"
+                        android:layout_marginBottom="17dp"
+                        android:text="@{memberBean.nickName}"
+                        android:textColor="@color/color_F38B26"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/member_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="@{memberBean.phone}"
+                        android:textColor="@color/color_F38B26"
+                        android:textSize="12sp"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/member_name"
+                        app:layout_constraintStart_toEndOf="@+id/member_name" />
+
+
+                    <ImageView
+                        android:id="@+id/avatar"
+                        setCircleImage="@{memberBean.avatarUrl}"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+                        app:layout_constraintStart_toStartOf="@+id/imageView8"
+                        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        setMemberAvatarBox="@{memberBean.memberType}"
+                        android:layout_width="66dp"
+                        android:layout_height="66dp"
+                        android:layout_marginEnd="17dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fillet_ffffff_4"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="选择油品"
+                        android:textColor="@color/color_3D4255"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/oil_type_recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:overScrollMode="never" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/icon_line"
+                        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/oil_model_recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:overScrollMode="never" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/oil_gun_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fillet_ffffff_4"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="选择油枪"
+                        android:textColor="@color/color_3D4255"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/oil_gun_recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:overScrollMode="never" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/oiler_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fillet_ffffff_4">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:text="加油员"
+                        android:textColor="@color/color_3D4255"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/oilerName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:hint="选择加油员" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:padding="20dp"
+                        android:rotation="180"
+                        android:src="@drawable/icon_back"
+                        app:tint="@color/color_939393" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout16"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fillet_ffffff_4"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:text="加油金额"
+                        android:textColor="@color/color_3D4255"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/oils_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:text="挂牌价：0.00元/L"
+                        android:textColor="@color/color_F38B26"
+                        android:textSize="12sp" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/fillet_3d4255_11"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+                        <TextView
+                            android:id="@+id/imageView5"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="6dp"
+                            android:text="￥"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/edit_oils_price"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginBottom="1dp"
+                            android:background="@color/white"
+                            android:gravity="center|left"
+                            android:hint="输入加油金额"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toStartOf="@+id/view1"
+                            app:layout_constraintStart_toEndOf="@+id/imageView5" />
+
+                        <View
+                            android:id="@+id/view1"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:background="@color/color_5F5F5F"
+                            app:layout_constraintEnd_toStartOf="@+id/oils_rise" />
+
+                        <TextView
+                            android:id="@+id/oils_rise"
+                            android:layout_width="90dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="约0.0L"
+                            android:textColor="@color/color_5F5F5F"
+
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="147dp"
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/fillet_ffffff_4"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout16">
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginTop="13dp"
+                        android:text="优惠活动"
+                        android:textColor="@color/color_3D4255"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/switchCompat"
+                        android:layout_width="40dp"
+                        android:layout_height="19dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/checkbox_switch"
+                        android:button="@null"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView18"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/icon_line"
+                        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+                    <TextView
+                        android:id="@+id/textView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginTop="13dp"
+                        android:text="优惠券"
+                        android:textColor="@color/color_3D4255"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="17dp"
+                        android:text="扫码优惠券二维码"
+                        android:textColor="@color/color_5F5F5F"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView19"
+                        app:layout_constraintStart_toEndOf="@+id/textView19"
+                        app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+                    <ImageView
+                        android:id="@+id/scan_code"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="17dp"
+                        android:src="@drawable/icon_scan_code"
+                        app:layout_constraintBottom_toBottomOf="@+id/switchCompat2"
+                        app:layout_constraintEnd_toStartOf="@+id/switchCompat2"
+                        app:layout_constraintTop_toTopOf="@+id/switchCompat2"
+                        app:tint="@color/color_F38B26" />
+
+                    <CheckBox
+                        android:id="@+id/switchCompat2"
+                        android:layout_width="40dp"
+                        android:layout_height="19dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/checkbox_switch"
+                        android:button="@null"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView19"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+                    <View
+                        android:id="@+id/view3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/icon_line"
+                        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+                    <TextView
+                        android:id="@+id/coupon"
+                        android:layout_width="60dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="17dp"
+                        android:background="@drawable/change_fc664a_f38b26_12"
+                        android:gravity="center"
+                        android:text="查看卡券"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view3" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/keyboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="266dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/fillet_ffffff_4"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout14"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/txy_red"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="15dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="41dp"
+                            android:src="@drawable/icon_danger" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="8dp"
+                            android:text="请勿在加油加气机旁使用手机"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/number_1"
+                        android:layout_width="0dp"
+                        android:layout_height="39dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/fillet_f5f5f6_4"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/number_2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout14" />
+
+                    <TextView
+                        android:id="@+id/number_2"
+                        android:layout_width="0dp"
+                        android:layout_height="39dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/fillet_f5f5f6_4"
+                        android:gravity="center"
+                        android:text="2"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/number_3"
+                        app:layout_constraintStart_toEndOf="@id/number_1"
+                        app:layout_constraintTop_toTopOf="@+id/number_1" />
+
+                    <TextView
+                        android:id="@+id/number_3"
+                        android:layout_width="0dp"
+                        android:layout_height="39dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/fillet_f5f5f6_4"
+                        android:gravity="center"
+                        android:text="3"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/number_2"
+                        app:layout_constraintTop_toTopOf="@+id/number_2" />
+
+
+                    <TextView
+                        android:id="@+id/number_4"
+                        android:layout_width="0dp"
+                        android:layout_height="39dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/fillet_f5f5f6_4"
+                        android:gravity="center"
+                        android:text="4"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/number_1"
+                        app:layout_constraintStart_toStartOf="@+id/number_1"
+                        app:layout_constraintTop_toBottomOf="@+id/number_1" />
+
+                    <TextView
+                        android:id="@+id/number_5"
+                        android:layout_width="0dp"
+                        android:layout_height="39dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/fillet_f5f5f6_4"
+                        android:gravity="center"
+                        android:text="5"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/number_2"
+                        app:layout_constraintStart_toStartOf="@+id/number_2"
+                        app:layout_constraintTop_toBottomOf="@+id/number_2" />
+
+                    <TextView
+                        android:id="@+id/number_6"
+                        android:layout_width="0dp"
+                        android:layout_height="39dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/fillet_f5f5f6_4"
+                        android:gravity="center"
+                        android:text="6"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/number_3"
+                        app:layout_constraintStart_toStartOf="@+id/number_3"
+                        app:layout_constraintTop_toBottomOf="@+id/number_3" />
+
+                    <TextView
+                        android:id="@+id/number_7"
+                        android:layout_width="0dp"
+                        android:layout_height="39dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/fillet_f5f5f6_4"
+                        android:gravity="center"
+                        android:text="7"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/number_4"
+                        app:layout_constraintStart_toStartOf="@+id/number_4"
+                        app:layout_constraintTop_toBottomOf="@+id/number_4" />
+
+                    <TextView
+                        android:id="@+id/number_8"
+                        android:layout_width="0dp"
+                        android:layout_height="39dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/fillet_f5f5f6_4"
+                        android:gravity="center"
+                        android:text="8"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/number_5"
+                        app:layout_constraintStart_toStartOf="@+id/number_5"
+                        app:layout_constraintTop_toBottomOf="@+id/number_5" />
+
+                    <TextView
+                        android:id="@+id/number_9"
+                        android:layout_width="0dp"
+                        android:layout_height="39dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/fillet_f5f5f6_4"
+                        android:gravity="center"
+                        android:text="9"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/number_6"
+                        app:layout_constraintStart_toStartOf="@+id/number_6"
+                        app:layout_constraintTop_toBottomOf="@+id/number_6" />
+
+
+                    <TextView
+                        android:id="@+id/number_0"
+                        android:layout_width="0dp"
+                        android:layout_height="39dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/fillet_f5f5f6_4"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/number_8"
+                        app:layout_constraintStart_toStartOf="@+id/number_8"
+                        app:layout_constraintTop_toBottomOf="@+id/number_7" />
+
+                    <TextView
+                        android:id="@+id/number_spot"
+                        android:layout_width="0dp"
+                        android:layout_height="39dp"
+                        android:background="@drawable/fillet_f5f5f6_4"
+                        android:gravity="center"
+                        android:text="."
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/number_0"
+                        app:layout_constraintEnd_toEndOf="@+id/number_7"
+                        app:layout_constraintStart_toStartOf="@+id/number_7"
+                        app:layout_constraintTop_toTopOf="@+id/number_0" />
+
+
+                    <ImageView
+                        android:id="@+id/delete"
+                        android:layout_width="0dp"
+                        android:layout_height="39dp"
+                        android:background="@drawable/fillet_f5f5f6_4"
+                        android:padding="12dp"
+                        android:paddingBottom="13dp"
+                        android:src="@drawable/icon_backspace"
+                        app:layout_constraintEnd_toEndOf="@+id/number_9"
+                        app:layout_constraintStart_toStartOf="@+id/number_9"
+                        app:layout_constraintTop_toTopOf="@+id/number_0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/linearLayout19"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:layout_width="220dp"
+                android:layout_height="44dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/fillet_f5f5f6_4"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:overScrollMode="never"
+                    android:text="应收款：￥0"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/integral"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
+                    android:text="积分：0"
+                    android:textColor="@color/color_F38B26"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/settle"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/change_fc664a_f38b26_4"
+                android:gravity="center"
+                android:text="结账"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

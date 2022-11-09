@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="oilsBean"
+            type="com.tx.zygj.bean.HandoverBean.OilsBean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:gravity="center"
+            android:text="@{oilsBean.model + `#优惠金额`}"
+            android:textColor="@color/color_3D4255"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="@{`￥` + oilsBean.price}"
+            android:gravity="end"
+            android:layout_marginEnd="18dp"
+            android:textColor="@color/color_939393"/>
+    </LinearLayout>
+</layout>

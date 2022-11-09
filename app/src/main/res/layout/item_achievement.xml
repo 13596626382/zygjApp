@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="achievementBean"
+            type="com.tx.zygj.bean.AchievementBean" />
+        <import type="android.view.View"/>
+    </data>
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{achievementBean.title}"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"/>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="43dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="7dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:visibility="@{achievementBean.check ? View.VISIBLE : View.INVISIBLE}"
+            android:background="@drawable/fillet_ffffff_4"/>
+    </LinearLayout>
+</layout>

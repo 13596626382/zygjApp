@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:text="92#"
+            android:textColor="@color/color_3D4255"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/price"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:background="@color/white"
+            android:gravity="end|center"
+            android:hint="0.00"
+            android:inputType="number"
+            android:digits="1234567890."
+            android:textColor="@color/color_939393"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_939393"
+            android:layout_gravity="center"
+            android:layout_marginEnd="16dp"
+
+            android:text="￥"/>
+    </LinearLayout>
+</layout>

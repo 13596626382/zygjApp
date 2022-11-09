@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/fillet_ffffff_4"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView63"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/fillet_f5f5f6_top_4"
+            android:gravity="center"
+            android:text="请输入登录权限密码"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dismiss"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/color_F38B26"
+            app:layout_constraintBottom_toBottomOf="@+id/textView63"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView64"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/txy_red"
+            android:textSize="15sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView63" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout21"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView64">
+
+            <TextView
+                android:id="@+id/pw_1"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/fillet_939393_hollow_4"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:textColor="@color/color_3D4255"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/pw_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextViewEdits" />
+
+            <TextView
+                android:id="@+id/pw_2"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/fillet_939393_hollow_4"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:textColor="@color/color_3D4255"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/pw_3"
+                app:layout_constraintStart_toEndOf="@id/pw_1"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextViewEdits" />
+
+            <TextView
+                android:id="@+id/pw_3"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/fillet_939393_hollow_4"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:textColor="@color/color_3D4255"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/pw_4"
+                app:layout_constraintStart_toEndOf="@id/pw_2"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextViewEdits" />
+
+            <TextView
+                android:id="@+id/pw_4"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/fillet_939393_hollow_4"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:textColor="@color/color_3D4255"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/pw_5"
+                app:layout_constraintStart_toEndOf="@id/pw_3"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextViewEdits" />
+
+            <TextView
+                android:id="@+id/pw_5"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/fillet_939393_hollow_4"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:textColor="@color/color_3D4255"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/pw_6"
+                app:layout_constraintStart_toEndOf="@id/pw_4"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextViewEdits" />
+
+            <TextView
+                android:id="@+id/pw_6"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/fillet_939393_hollow_4"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:textColor="@color/color_3D4255"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/pw_5"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextViewEdits" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/keyboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/fillet_ffffff_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout21">
+
+            <TextView
+                android:id="@+id/number_1"
+                android:layout_width="0dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/fillet_f5f5f6_4"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/color_3D4255"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/number_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/number_2"
+                android:layout_width="0dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/fillet_f5f5f6_4"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@color/color_3D4255"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/number_3"
+                app:layout_constraintStart_toEndOf="@id/number_1"
+                app:layout_constraintTop_toTopOf="@+id/number_1" />
+
+            <TextView
+                android:id="@+id/number_3"
+                android:layout_width="0dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/fillet_f5f5f6_4"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@color/color_3D4255"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/delete"
+                app:layout_constraintStart_toEndOf="@+id/number_2"
+                app:layout_constraintTop_toTopOf="@+id/number_2" />
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="0dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/fillet_f5f5f6_4"
+                android:paddingStart="13dp"
+                android:paddingTop="13dp"
+                android:paddingEnd="13dp"
+                android:paddingBottom="13dp"
+                android:src="@drawable/icon_backspace"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/number_3"
+                app:layout_constraintTop_toTopOf="@+id/number_1" />
+
+            <TextView
+                android:id="@+id/number_4"
+                android:layout_width="0dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/fillet_f5f5f6_4"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="@color/color_3D4255"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/number_1"
+                app:layout_constraintStart_toStartOf="@+id/number_1"
+                app:layout_constraintTop_toBottomOf="@+id/number_1" />
+
+            <TextView
+                android:id="@+id/number_5"
+                android:layout_width="0dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/fillet_f5f5f6_4"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="@color/color_3D4255"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/number_2"
+                app:layout_constraintStart_toStartOf="@+id/number_2"
+                app:layout_constraintTop_toBottomOf="@+id/number_2" />
+
+            <TextView
+                android:id="@+id/number_6"
+                android:layout_width="0dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/fillet_f5f5f6_4"
+                android:gravity="center"
+                android:text="6"
+                android:textColor="@color/color_3D4255"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/number_3"
+                app:layout_constraintStart_toStartOf="@+id/number_3"
+                app:layout_constraintTop_toBottomOf="@+id/number_3" />
+
+            <TextView
+                android:id="@+id/number_7"
+                android:layout_width="0dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/fillet_f5f5f6_4"
+                android:gravity="center"
+                android:text="7"
+                android:textColor="@color/color_3D4255"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/number_4"
+                app:layout_constraintStart_toStartOf="@+id/number_4"
+                app:layout_constraintTop_toBottomOf="@+id/number_4" />
+
+            <TextView
+                android:id="@+id/number_8"
+                android:layout_width="0dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/fillet_f5f5f6_4"
+                android:gravity="center"
+                android:text="8"
+                android:textColor="@color/color_3D4255"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/number_5"
+                app:layout_constraintStart_toStartOf="@+id/number_5"
+                app:layout_constraintTop_toBottomOf="@+id/number_5" />
+
+            <TextView
+                android:id="@+id/number_9"
+                android:layout_width="0dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/fillet_f5f5f6_4"
+                android:gravity="center"
+                android:text="9"
+                android:textColor="@color/color_3D4255"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/number_6"
+                app:layout_constraintStart_toStartOf="@+id/number_6"
+                app:layout_constraintTop_toBottomOf="@+id/number_6" />
+
+            <TextView
+                android:id="@+id/number_0"
+                android:layout_width="0dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/fillet_f5f5f6_4"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/color_3D4255"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/number_8"
+                app:layout_constraintStart_toStartOf="@+id/number_7"
+                app:layout_constraintTop_toBottomOf="@+id/number_7" />
+
+            <ImageView
+                android:id="@+id/backspace"
+                android:layout_width="0dp"
+                android:layout_height="39dp"
+                android:background="@drawable/fillet_f5f5f6_4"
+                android:paddingStart="13dp"
+                android:paddingTop="13dp"
+                android:paddingEnd="13dp"
+                android:paddingBottom="13dp"
+                android:src="@drawable/icon_backspace"
+                app:layout_constraintBottom_toBottomOf="@+id/number_0"
+                app:layout_constraintEnd_toEndOf="@+id/number_9"
+                app:layout_constraintStart_toStartOf="@+id/number_9" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

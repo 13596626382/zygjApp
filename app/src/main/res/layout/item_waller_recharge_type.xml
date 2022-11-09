@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="walletRechargeTypeBean"
+            type="com.tx.zygj.bean.WalletRechargeTypeBean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="@{walletRechargeTypeBean.type}"
+            android:textColor="@color/color_3D4255"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/type_line"
+            android:layout_width="35dp"
+            android:layout_height="3dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/change_fc664a_f38b26_4"
+            android:visibility="invisible" />
+    </LinearLayout>
+</layout>
