@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="rechargeActivityBean"
+            type="com.tx.zygj.bean.WalletRechargeBean.RechargeActivityBean" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:text="@{`【充值反赠】` + rechargeActivityBean.activityName}"
+            android:textColor="@color/color_3D4255"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/textView"
+            android:text="（不满足最低金额无法参加活动)"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginEnd="23dp"
+            android:background="@drawable/checkbox_payment"
+            android:button="@null" />
+    </RelativeLayout>
+</layout>

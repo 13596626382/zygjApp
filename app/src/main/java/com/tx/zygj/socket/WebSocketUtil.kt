@@ -55,6 +55,7 @@ object WebSocketUtil {
         if (!isReconnect) return
         if (reconnect_num < MAX_NUM) {
             logE("尝试第${reconnect_num + 1} 次重连")
+            "尝试第${reconnect_num + 1}次重连远程打印服务".runOnUiThread()
             Thread.sleep(10000)
             connect()
             reconnect_num++

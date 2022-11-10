@@ -1,56 +1,25 @@
 package com.tx.zygj.bean
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class WalletRechargeBean(
-    val dieselOilCard: ArrayList<DieselOilCardBean>, //柴油卡
-    val gasolineCard: ArrayList<GasolineCardBean>, //汽油卡
-    val currency: ArrayList<CurrencyBean>, //通用钱包
-    val naturalGasCard: ArrayList<NaturalGasCardBean>, //天然气卡
-) {
-    data class DieselOilCardBean(
+    val gasolineCard: ArrayList<RechargeActivityBean>, //汽油卡
+    val dieselOilCard: ArrayList<RechargeActivityBean>, //柴油卡
+    val currency: ArrayList<RechargeActivityBean>, //通用钱包
+    val naturalGasCard: ArrayList<RechargeActivityBean>, //天然气卡
+) : Parcelable {
+    @Parcelize
+    data class RechargeActivityBean(
         val id: Int,
         val activityName: String,
         val oilCardType: String,
         val startTime: String,
         val endTime: String,
-        val rechargeAmount: Int,
-        val give: Int,
+        val rechargeAmount: Double,
+        val give: Double,
         val giveIntegral: Int,
         val gasId: Int,
-    )
-
-    data class GasolineCardBean(
-        val id: Int,
-        val activityName: String,
-        val oilCardType: String,
-        val startTime: String,
-        val endTime: String,
-        val rechargeAmount: Int,
-        val give: Int,
-        val giveIntegral: Int,
-        val gasId: Int,
-    )
-
-    data class CurrencyBean(
-        val id: Int,
-        val activityName: String,
-        val oilCardType: String,
-        val startTime: String,
-        val endTime: String,
-        val rechargeAmount: Int,
-        val give: Int,
-        val giveIntegral: Int,
-        val gasId: Int,
-    )
-
-    data class NaturalGasCardBean(
-        val id: Int,
-        val activityName: String,
-        val oilCardType: String,
-        val startTime: String,
-        val endTime: String,
-        val rechargeAmount: Int,
-        val give: Int,
-        val giveIntegral: Int,
-        val gasId: Int,
-    )
+    ) : Parcelable
 }

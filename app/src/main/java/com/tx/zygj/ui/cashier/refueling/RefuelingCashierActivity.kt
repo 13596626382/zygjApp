@@ -155,7 +155,8 @@ class RefuelingCashierActivity :
                 notifyDataSetChanged()
             }
         }
-        binding.integral.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
+        binding.integral.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG //下划线
+        //从会员信息列表跳转吧
         memberManageBean = intentParcelableExtras(CommonConstant.MEMBER_BEAN)
         if (memberManageBean != null) {
             binding.memberBean = memberManageBean
@@ -341,11 +342,12 @@ class RefuelingCashierActivity :
     override fun update() {
         //如果支付成功，清除一下相关数据
         if (CommonConstant.isPaySuccess) {
-            memberManageBean = null
             oilerBean = null
-            oilGunBean = null
-            binding.member.visibility = View.GONE
-            binding.oilGunLayout.visibility = View.GONE
+            //如果从会员信息跳转支付成功不隐藏
+            if (intentParcelableExtras<MemberManageBean>(CommonConstant.MEMBER_BEAN) == null) {
+                memberManageBean = null
+                binding.member.visibility = View.GONE
+            }
             binding.keyboard.visibility = View.GONE
             binding.editOilsPrice.text = ""
             binding.price.text = "应收款：￥0"

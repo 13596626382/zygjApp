@@ -3,17 +3,29 @@ package com.tx.zygj.ui.order.wallet
 import androidx.lifecycle.MutableLiveData
 import com.llx.common.CommonConstant
 import com.llx.common.base.BaseViewModel
+import com.llx.common.util.plus1
 import com.llx.common.util.toast
 import com.tx.zygj.bean.PaySuccessBean
+import com.tx.zygj.bean.WalletRechargeBean
 
 class WalletOrderViewModel : BaseViewModel() {
     private val repository by lazy { WalletOrderRepository() }
     var requestOrderNo = MutableLiveData<String>()
     var paySuccessBean = MutableLiveData<PaySuccessBean>()
+    var walletRechargeBean = MutableLiveData<WalletRechargeBean>()
 
-    fun findOrderNo(cardType: Int, memberPhone: String?, money: Double, gasMan: String?) {
+    fun findOrderNo(
+        cardType: Int,
+        memberPhone: String?,
+        money: Double?,
+        give: Double?,
+        giveIntegral: Int?,
+    ) {
         launch {
-            val data = repository.findOrderNo(cardType, memberPhone, money, gasMan)
+            val data = repository.findOrderNo(
+                cardType, memberPhone, money, CommonConstant.getUserInfo()?.gasId,
+                CommonConstant.getUserInfo()?.gasName, give, money?.plus1(give), giveIntegral ?: 0
+            )
             if (data.code == 0) {
                 requestOrderNo.value = data.getData()
                 CommonConstant.setOrderNo(data.getData())
@@ -25,7 +37,19 @@ class WalletOrderViewModel : BaseViewModel() {
 
     fun getRechargeActivity(memberId: Int?) {
         launch {
-            repository.getRechargeActivity(memberId)
+            val data = repository.getRechargeActivity(memberId)
+            if (data.code == 0) {
+                walletRechargeBean.value = data.getData()
+            }
+        }
+    }
+
+    fun getRechargeActivityDetails(giftId: Int?, money: String) {
+        launch {
+            val data = repository.getRechargeActivityDetails(giftId, money.toDouble())
+            if (data.code == 0) {
+                walletRechargeBean.value = data.getData()
+            }
         }
     }
 

@@ -81,11 +81,7 @@ class WalletRechargeActivity :
         binding.moneyRecyclerView.bindGrid(mMoneyAdapter, 3) {
             setOnItemClickListener { _, _, position ->
                 if (data[position].isCheck) return@setOnItemClickListener
-                if (checkMember()) {
-                    toast("请选择会员")
-                    binding.mantle.startAnimation(animation)
-                    return@setOnItemClickListener
-                }
+
                 data.forEach {
                     it.isCheck = false
                 }
@@ -125,11 +121,6 @@ class WalletRechargeActivity :
         //选择金额
         footView.money.setOnSingleClickListener {
             if (binding.keyboard.visibility == View.VISIBLE) return@setOnSingleClickListener
-            if (checkMember()) {
-                toast("请选择会员")
-                binding.mantle.startAnimation(animation)
-                return@setOnSingleClickListener
-            }
             mMoneyAdapter.data.forEach { it1 ->
                 it1.isCheck = false
             }

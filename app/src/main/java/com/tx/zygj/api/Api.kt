@@ -317,23 +317,25 @@ interface Api {
     /**
      * 钱包充值生成订单
      * @param cardType 0 1 2 3 汽油卡 柴油卡 通用钱包 天然气
-     * @param memberPhone 微信id
-     * @param money 充值金额
+     * @param memberPhone 会员手机号
+     * @param money 实收金额
      * @param gesId 油站id
      * @param gasMan 加油员
      * @param give 赠送金额
-     * @param receivable 应收金额
+     * @param receivable 到账金额
+     * @param giveIntegral 赠送积分
      */
     @FormUrlEncoded
     @POST("pos/recharge")
     suspend fun findOrderNo(
         @Field("cardType") cardType: Int,
         @Field("memberPhone") memberPhone: String?,
-        @Field("money") money: Double,
+        @Field("money") money: Double?,
         @Field("gesId") gesId: Int?,
         @Field("gasMan") gasMan: String?,
-        @Field("give") give: Double = 0.00,
-        @Field("receivable") receivable: Double,
+        @Field("give") give: Double?,
+        @Field("receivable") receivable: Double?,
+        @Field("giveIntegral") giveIntegral: Int?,
     ): ApiBean<String>
 
     /**
@@ -527,4 +529,16 @@ interface Api {
     @FormUrlEncoded
     @POST("rechargeDiscount/findRechargeDiscount")
     suspend fun getRechargeActivity(@Field("memberId") memberId: Int?): ApiBean<WalletRechargeBean>
+
+    /**
+     * 充值活动明细
+     * @param giftId 活动id
+     * @param money 金额
+     */
+    @FormUrlEncoded
+    @POST("rechargeDiscount/getDiscountDetails")
+    suspend fun getRechargeActivityDetails(
+        @Field("giftId") giftId: Int?,
+        @Field("money") money: Double
+    ): ApiBean<WalletRechargeBean>
 }
