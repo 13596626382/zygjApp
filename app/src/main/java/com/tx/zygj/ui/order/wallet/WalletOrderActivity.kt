@@ -54,37 +54,39 @@ class WalletOrderActivity :
             model.findOrderNo(cardType, memberManageBean?.phone, price.toDouble(), oilerBean?.name)
         }
 
-        model.orderNo.observe(this) {
-            loadDialog.dismiss()
-            orderNo = it
-            startActivityForResult(
-                Intent(mContext, ScanCodeActivity::class.java).putExtra(
-                    CommonConstant.SCAN_TYPE, true
-                ), CommonConstant.REQUEST_CODE
-            )
-        }
-
-        model.paySuccessBean.observe(this) {
-            if (binding.tickets.isChecked) {
-                SunmiPrintHelper.sendWalletRawData(it, memberManageBean)
-            }
-            loadDialog.dismiss()
-            EventBus.getDefault().post(
-                TtsBean(
-                    stringBuild(memberManageBean?.nickName, "充值", price.subPoint(), "元欢迎下次光临")
+        model.apply {
+            getRechargeActivity(memberManageBean?.id)
+            requestOrderNo.observe(this@WalletOrderActivity) {
+                loadDialog.dismiss()
+                orderNo = it
+                startActivityForResult(
+                    Intent(mContext, ScanCodeActivity::class.java).putExtra(
+                        CommonConstant.SCAN_TYPE, true
+                    ), CommonConstant.REQUEST_CODE
                 )
-            )
-            startActivity<WalletCompleteOrderActivity>(
-                CommonConstant.MEMBER_BEAN to memberManageBean,
-                "paySuccessBean" to it
-            )
-            onBack()
+            }
+
+            paySuccessBean.observe(this@WalletOrderActivity) {
+                if (binding.tickets.isChecked) {
+                    SunmiPrintHelper.sendWalletRawData(it, memberManageBean)
+                }
+                loadDialog.dismiss()
+                EventBus.getDefault().post(
+                    TtsBean(
+                        stringBuild(memberManageBean?.nickName, "充值", price.subPoint(), "元欢迎下次光临")
+                    )
+                )
+                startActivity<WalletCompleteOrderActivity>(
+                    CommonConstant.MEMBER_BEAN to memberManageBean,
+                    "paySuccessBean" to it
+                )
+                onBack()
+            }
+            requestResult.observe(this@WalletOrderActivity) {
+                loadDialog.dismiss()
+            }
         }
 
-
-        model.requestResult.observe(this) {
-            loadDialog.dismiss()
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

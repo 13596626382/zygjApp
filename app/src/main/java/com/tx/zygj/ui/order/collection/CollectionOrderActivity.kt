@@ -133,58 +133,56 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
             payMode = "扫码支付"
         }
 
-
-        model.orderNo.observe(this) {
-            loadDialog.dismiss()
-            orderNo = it
-            when (payMode) {
-                "扫码支付" -> {
-                    startActivityForResult(
-                        Intent(mContext, ScanCodeActivity::class.java).putExtra(
-                            CommonConstant.SCAN_TYPE, true
-                        ), CommonConstant.REQUEST_CODE
-                    )
-                }
-                "通用钱包支付" -> {
-                    model.cardPayment(orderNo, memberManageBean?.phone, price.toDouble())
-                }
-                else -> {
-                    model.oidCardPayment(
-                        orderNo,
-                        memberManageBean?.phone,
-                        price.toDouble(),
-                        oilModelBean?.typeId
-                    )
+        model.apply {
+            requestOrderNo.observe(this@CollectionOrderActivity) {
+                loadDialog.dismiss()
+                orderNo = it
+                when (payMode) {
+                    "扫码支付" -> {
+                        startActivityForResult(
+                            Intent(mContext, ScanCodeActivity::class.java).putExtra(
+                                CommonConstant.SCAN_TYPE, true
+                            ), CommonConstant.REQUEST_CODE
+                        )
+                    }
+                    "通用钱包支付" -> {
+                        model.cardPayment(orderNo, memberManageBean?.phone, price.toDouble())
+                    }
+                    else -> {
+                        model.oidCardPayment(
+                            orderNo,
+                            memberManageBean?.phone,
+                            price.toDouble(),
+                            oilModelBean?.typeId
+                        )
+                    }
                 }
             }
-
-        }
-
-        model.paySuccessBean.observe(this) {
-            if (binding.tickets.isChecked) {
-                SunmiPrintHelper.sendCashierRawData(it, memberManageBean)
-            }
-            loadDialog.dismiss()
-            EventBus.getDefault().post(
-                TtsBean(
-                    stringBuild(it.memberName, "支付", it.actual?.subPoint(), "元, 欢迎下次光临"),
-                    it.orderNo
+            paySuccessBean.observe(this@CollectionOrderActivity) {
+                if (binding.tickets.isChecked) {
+                    SunmiPrintHelper.sendCashierRawData(it, memberManageBean)
+                }
+                loadDialog.dismiss()
+                EventBus.getDefault().post(
+                    TtsBean(
+                        stringBuild(it.memberName, "支付", it.actual?.subPoint(), "元, 欢迎下次光临"),
+                        it.orderNo
+                    )
                 )
-            )
-            startActivity<CompleteOrderActivity>(
-                CommonConstant.MEMBER_BEAN to memberManageBean,
-                "paySuccessBean" to it
-            )
-            onBack()
+                startActivity<CompleteOrderActivity>(
+                    CommonConstant.MEMBER_BEAN to memberManageBean,
+                    "paySuccessBean" to it
+                )
+                onBack()
+            }
+            requestResult.observe(this@CollectionOrderActivity) {
+                loadDialog.dismiss()
+            }
+            requestResult.observe(this@CollectionOrderActivity) {
+                loadDialog.dismiss()
+            }
         }
 
-        model.requestResult.observe(this) {
-            loadDialog.dismiss()
-        }
-
-        model.requestResult.observe(this) {
-            loadDialog.dismiss()
-        }
     }
 
     private fun resetLayout() {

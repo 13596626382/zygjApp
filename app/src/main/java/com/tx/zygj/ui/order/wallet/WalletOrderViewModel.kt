@@ -8,18 +8,24 @@ import com.tx.zygj.bean.PaySuccessBean
 
 class WalletOrderViewModel : BaseViewModel() {
     private val repository by lazy { WalletOrderRepository() }
-    var orderNo = MutableLiveData<String>()
+    var requestOrderNo = MutableLiveData<String>()
     var paySuccessBean = MutableLiveData<PaySuccessBean>()
 
     fun findOrderNo(cardType: Int, memberPhone: String?, money: Double, gasMan: String?) {
         launch {
             val data = repository.findOrderNo(cardType, memberPhone, money, gasMan)
             if (data.code == 0) {
-                orderNo.value = data.getData()
+                requestOrderNo.value = data.getData()
                 CommonConstant.setOrderNo(data.getData())
             } else {
                 toast(data.msg)
             }
+        }
+    }
+
+    fun getRechargeActivity(memberId: Int?) {
+        launch {
+            repository.getRechargeActivity(memberId)
         }
     }
 

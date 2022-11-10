@@ -28,7 +28,7 @@ object OcrUtil {
                 .setModeType(modeType)
                 .build()
         // 初始化 SDK
-        OcrSDKKit.getInstance().initWithConfig(context, configBuilder)
+//        OcrSDKKit.getInstance().initWithConfig(context, configBuilder)
     }
 
     fun startProcessOcr(

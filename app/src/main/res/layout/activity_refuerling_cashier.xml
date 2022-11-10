@@ -189,7 +189,8 @@
                         android:text="选择油品"
                         android:textColor="@color/color_3D4255"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/oil_type_recyclerView"

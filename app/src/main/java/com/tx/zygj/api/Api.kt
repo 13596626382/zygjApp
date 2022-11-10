@@ -18,8 +18,7 @@ interface Api {
     @FormUrlEncoded
     @POST("pos/user/login")
     suspend fun login(
-        @Field("phone") phone: String,
-        @Field("password") passWord: String
+        @Field("phone") phone: String, @Field("password") passWord: String
     ): ApiBean<UserInfoBean>
 
     /**
@@ -93,8 +92,7 @@ interface Api {
     @FormUrlEncoded
     @POST("pos/member/likeMembers")
     suspend fun likeMembers(
-        @Field("by") like: String,
-        @Field("pageCurrent") page: Int
+        @Field("by") like: String, @Field("pageCurrent") page: Int
     ): RefreshApiBean<MemberManageBean>
 
     /**
@@ -224,8 +222,7 @@ interface Api {
     @FormUrlEncoded
     @POST("pos/order/orderList")
     suspend fun getOrderList(
-        @Field("memberPhone") memberPhone: String?,
-        @Field("years") years: String?
+        @Field("memberPhone") memberPhone: String?, @Field("years") years: String?
     ): ApiBean<ArrayList<ConsumeBean>>
 
     /**
@@ -462,8 +459,7 @@ interface Api {
     @FormUrlEncoded
     @POST("pos/user/getDetails")
     suspend fun getOrderTodayDetails(
-        @Field("id") id: Int,
-        @Field("typeId") typeId: String?
+        @Field("id") id: Int, @Field("typeId") typeId: String?
     ): ApiBean<PaySuccessBean>
 
     /**
@@ -520,7 +516,15 @@ interface Api {
     @FormUrlEncoded
     @POST("pos/handover")
     suspend fun handover(
-        @Field("phone") phone: String?,
-        @Field("password") passWord: String
+        @Field("phone") phone: String?, @Field("password") passWord: String
     ): ApiBean<MemberManageBean>
+
+    /**
+     * 获取充值活动
+     *
+     * @param memberId 会员Id
+     */
+    @FormUrlEncoded
+    @POST("rechargeDiscount/findRechargeDiscount")
+    suspend fun getRechargeActivity(@Field("memberId") memberId: Int?): ApiBean<WalletRechargeBean>
 }

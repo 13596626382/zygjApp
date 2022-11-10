@@ -20,6 +20,8 @@ class WalletOrderRepository : BaseRepository() {
             receivable = money
         )
 
+    suspend fun getRechargeActivity(memberId: Int?) = retrofit.getRechargeActivity(memberId)
+
     suspend fun play(authCode: String, tradeNo: String, total: Double) =
         retrofit.pay(authCode, tradeNo, total, 1)
 

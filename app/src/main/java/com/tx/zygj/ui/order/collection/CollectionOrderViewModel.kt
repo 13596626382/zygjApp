@@ -8,9 +8,8 @@ import com.tx.zygj.bean.PaySuccessBean
 
 class CollectionOrderViewModel : BaseViewModel() {
     private val repository by lazy { CollectionOrderRepository() }
-    var orderNo = MutableLiveData<String>()
+    var requestOrderNo = MutableLiveData<String>()
     var paySuccessBean = MutableLiveData<PaySuccessBean>()
-
 
     fun generateOrder(
         model: String?, typeId: Int?,
@@ -26,7 +25,7 @@ class CollectionOrderViewModel : BaseViewModel() {
                 gunNumber
             )
             if (data.code == 0) {
-                orderNo.value = data.getData()
+                requestOrderNo.value = data.getData()
                 CommonConstant.setOrderNo(data.getData())
             } else {
                 toast(data.msg)
