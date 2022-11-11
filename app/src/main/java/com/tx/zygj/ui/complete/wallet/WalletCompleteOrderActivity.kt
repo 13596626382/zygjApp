@@ -22,16 +22,7 @@ class WalletCompleteOrderActivity :
         paySuccessBean = intentParcelableExtras("paySuccessBean")
 
         binding.memberBeam = memberManageBean
-        binding.price.text = paySuccessBean?.receivable
-        binding.operator.text = paySuccessBean?.gasMan
-        binding.orderNo.text = paySuccessBean?.orderNo
-        binding.balance.text = paySuccessBean?.balance
-        binding.oilType.text = when (paySuccessBean?.cardType) {
-            0 -> "汽油卡"
-            1 -> "柴油卡"
-            2 -> "通用钱包"
-            else -> "天然气"
-        }
+        binding.paySuccessBean = paySuccessBean
         binding.repair.setOnClickListener {
             binding.repair.isEnabled = false
             binding.repair.background = getCompatDrawable(R.drawable.fillet_dbdbdb_22)

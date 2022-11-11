@@ -46,6 +46,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--                <category android:name="android.intent.category.HOME" />-->
             </intent-filter>
         </activity>
         <activity android:name=".ui.login.LoginActivity" />
@@ -90,7 +92,7 @@
         <activity android:name=".ui.reconciliation.details.ReconciliationDetailsActivity" />
         <activity android:name=".ui.achievements.AchievementsActivity" />
         <activity android:name=".ui.above.AboveActivity" />
-        <activity android:name=".ui.voice.VoicePageActivity"/>
+        <activity android:name=".ui.voice.VoicePageActivity" />
 
         <receiver
             android:name=".receiver.NetworkConnectChangedReceiver"

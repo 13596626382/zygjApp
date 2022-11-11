@@ -4,25 +4,27 @@ import androidx.lifecycle.MutableLiveData
 import com.llx.common.CommonConstant
 import com.llx.common.base.BaseViewModel
 import com.llx.common.util.toast
+import com.tx.zygj.bean.CollectionDiscountBean
 import com.tx.zygj.bean.PaySuccessBean
 
 class CollectionOrderViewModel : BaseViewModel() {
     private val repository by lazy { CollectionOrderRepository() }
     var requestOrderNo = MutableLiveData<String>()
+    var collectionDiscountBean = MutableLiveData<CollectionDiscountBean>()
     var paySuccessBean = MutableLiveData<PaySuccessBean>()
 
     fun generateOrder(
         model: String?, typeId: Int?,
         gasMan: String?, actual: Double, totalPrice: Double,
         memberPhone: String?, payModel: String, oilsRise: Double, oilPrice: Double?,
-        gunNumber: Int?
+        gunNumber: Int?, integral: Int?, discount: Double?
     ) {
         launch {
             val data = repository.generateOrder(
                 model, typeId, CommonConstant.getUserInfo()?.gasId,
                 gasMan, actual, totalPrice,
                 memberPhone, payModel, oilsRise, oilPrice,
-                gunNumber
+                gunNumber, integral, discount
             )
             if (data.code == 0) {
                 requestOrderNo.value = data.getData()
@@ -32,6 +34,17 @@ class CollectionOrderViewModel : BaseViewModel() {
 
             }
             requestResult.value = data.code == 0
+        }
+    }
+
+    fun getRefuelingDiscount(
+        totalPrice: Double?, oilId: Int?, memberId: Int?
+    ) {
+        launch {
+            val data = repository.getRefuelingDiscount(totalPrice, oilId, memberId)
+            if (data.code == 0) {
+                collectionDiscountBean.value = data.getData()
+            }
         }
     }
 
@@ -47,9 +60,9 @@ class CollectionOrderViewModel : BaseViewModel() {
         }
     }
 
-    fun cardPayment(orderNo: String, memberPhone: String?, actual: Double) {
+    fun cardPayment(orderNo: String, memberPhone: String?, actual: Double, integral: Int) {
         launch {
-            val data = repository.cardPayment(orderNo, memberPhone, actual)
+            val data = repository.cardPayment(orderNo, memberPhone, actual, integral)
             if (data.code == 0) {
                 paySuccessBean.value = data.getData()
             } else {
@@ -59,9 +72,15 @@ class CollectionOrderViewModel : BaseViewModel() {
         }
     }
 
-    fun oidCardPayment(orderNo: String, memberPhone: String?, actual: Double, typeId: Int?) {
+    fun oidCardPayment(
+        orderNo: String,
+        memberPhone: String?,
+        actual: Double,
+        integral: Int,
+        typeId: Int?
+    ) {
         launch {
-            val data = repository.oidCardPayment(orderNo, memberPhone, actual, typeId)
+            val data = repository.oidCardPayment(orderNo, memberPhone, actual, integral, typeId)
             if (data.code == 0) {
                 paySuccessBean.value = data.getData()
             } else {

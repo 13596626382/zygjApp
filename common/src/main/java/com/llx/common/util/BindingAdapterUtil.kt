@@ -22,7 +22,7 @@ fun setCardType(view: TextView, cardType: Int) {
         0 -> "汽油卡"
         1 -> "柴油卡"
         2 -> "通用钱包"
-        else -> "天然气"
+        else -> "天然气卡"
     }
 }
 

@@ -76,15 +76,6 @@ interface Api {
     @POST("pos/member/toUpdateMember")
     suspend fun getMemBerMsg(@Field("id") id: Int?): ApiBean<MemberManageBean>
 
-
-    /**
-     * 扫码获取会员信息
-     * @param id 会员id
-     */
-    @FormUrlEncoded
-    @POST("pos/member/findByPhone")
-    suspend fun getMemBerMsgPhone(@Field("id") id: Int?): ApiBean<MemberManageBean>
-
     /**
      * 查找会员
      * @param like 搜索条件 姓名 手机号 车牌号暂无
@@ -297,6 +288,8 @@ interface Api {
      *  @param oilsRise 加油数量
      *  @param oilPrice 单价
      *  @param gunNumber 加油枪号
+     *  @param integral 赠送积分
+     *  @param discount 优惠金额
      */
     @FormUrlEncoded
     @POST("pos/order/create")
@@ -312,6 +305,8 @@ interface Api {
         @Field("oilsRise") oilsRise: Double? = 0.00,
         @Field("oilPrice") oilPrice: Double? = 0.00,
         @Field("gunNumber") gunNumber: Int? = 0,
+        @Field("integral") integral: Int? = 0,
+        @Field("discount") discount: Double? = 0.00,
     ): ApiBean<String>
 
     /**
@@ -362,6 +357,7 @@ interface Api {
         @Field("OrderNo") orderNo: String,
         @Field("memberPhone") memberPhone: String?,
         @Field("actual") actual: Double,
+        @Field("integral") integral: Int,
         @Field("typeId") typeId: Int?
     ): ApiBean<PaySuccessBean>
 
@@ -377,8 +373,9 @@ interface Api {
     suspend fun cardPayment(
         @Field("OrderNo") orderNo: String,
         @Field("memberPhone") memberPhone: String?,
-        @Field("actual") actual: Double
-    ): ApiBean<PaySuccessBean>
+        @Field("actual") actual: Double,
+        @Field("integral") integral: Int
+        ): ApiBean<PaySuccessBean>
 
 
     /**
@@ -513,7 +510,7 @@ interface Api {
     /**
      * 交班查询密码
      * @param phone 登录账号
-     * @param pw 输入的密码
+     * @param passWord 输入的密码
      */
     @FormUrlEncoded
     @POST("pos/handover")
@@ -541,4 +538,19 @@ interface Api {
         @Field("giftId") giftId: Int?,
         @Field("money") money: Double
     ): ApiBean<WalletRechargeBean>
+
+    /**
+     * 获取消费活动，选择最优
+     *
+     * @param totalPrice 加油金额
+     * @param oilId 油号id
+     * @param memberId 会员id
+     */
+    @FormUrlEncoded
+    @POST("refuelingDiscount/findRefuelingDiscount")
+    suspend fun getRefuelingDiscount(
+        @Field("totalPrice") totalPrice: Double?,
+        @Field("oilId") oilId: Int?,
+        @Field("memberId") memberId: Int??
+    ): ApiBean<CollectionDiscountBean>
 }

@@ -9,6 +9,10 @@
             name="memberBeam"
             type="com.tx.zygj.bean.MemberManageBean" />
 
+        <variable
+            name="paySuccessBean"
+            type="com.tx.zygj.bean.PaySuccessBean" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,6 +75,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginEnd="16dp"
                             android:gravity="end|center"
+                            android:text="@{paySuccessBean.orderNo}"
                             android:textColor="@color/black" />
                     </LinearLayout>
 
@@ -156,6 +161,7 @@
 
                         <TextView
                             android:id="@+id/oil_type"
+                            setCardType="@{paySuccessBean.cardType}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="16dp"
@@ -190,6 +196,37 @@
                             android:layout_height="match_parent"
                             android:layout_marginEnd="16dp"
                             android:gravity="end|center"
+                            android:text="@{paySuccessBean.receivable}"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@color/color_F5F5F6" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"
+                            android:text="赠送金额"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/give_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="16dp"
+                            android:gravity="end|center"
+                            android:text="@{paySuccessBean.give}"
                             android:textColor="@color/black" />
                     </LinearLayout>
 
@@ -219,6 +256,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginEnd="16dp"
                             android:gravity="end|center"
+                            android:text="@{paySuccessBean.balance}"
                             android:textColor="@color/black" />
                     </LinearLayout>
 
@@ -239,6 +277,36 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginStart="16dp"
+                            android:text="赠送积分"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="16dp"
+                            android:gravity="end|center"
+                            android:text="@{paySuccessBean.giveIntegral}"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@color/color_F5F5F6" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"
                             android:text="加油员"
                             android:textColor="@color/black" />
 
@@ -248,6 +316,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginEnd="16dp"
                             android:gravity="end|center"
+                            android:text="@{paySuccessBean.gasName}"
                             android:textColor="@color/black" />
                     </LinearLayout>
 

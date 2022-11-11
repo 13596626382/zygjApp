@@ -176,12 +176,9 @@ object SunmiPrintHelper {
                     line = if (printBean.typeStatus == 0) 2 else 1
                 )
             }
-
             if (printBean.typeStatus == 1) {
                 setting("加油小票", alignment = 1, line = 2)
             }
-
-
             if (printBean.orderNoStatus == 1) {
                 setting("订单编号: ${paySuccessBean?.orderNo}")
             }
@@ -208,11 +205,9 @@ object SunmiPrintHelper {
 
             setting("----------------------------------")
 
-
             setting("实收金额：${paySuccessBean?.actual}", size = 30f)
             setting("支付方式：${paySuccessBean?.payModel}")
-//            setting("加油赠送： +0.00")
-            setting("赠送积分：0")
+            setting("赠送积分：${paySuccessBean?.integral}")
 
             setting("----------------------------------")
 
@@ -383,8 +378,7 @@ object SunmiPrintHelper {
             setting("实收金额：${paySuccessBean?.money}", size = 30f)
 
             setting("支付方式：扫码支付")
-//            setting("加油赠送： +0.00")
-            setting("赠送积分：0")
+            setting("赠送积分：${paySuccessBean?.giveIntegral}")
 
             setting("----------------------------------")
 

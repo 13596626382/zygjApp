@@ -25,6 +25,7 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
     private var oilModelBean: OilBean.OilModelBean? = null //油品
     private var oilGunBean: OilGunBean? = null //油枪
     private var oilerBean: OilerBean? = null //加油员
+    private var collectionDiscountBean: CollectionDiscountBean? = null//优惠活动
 
     private var price = "" //支付金额
     private var orderNo = "" //订单号
@@ -45,6 +46,7 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
         oilsRise = intentStringExtras("oilsRise")!!
         binding.oilModelBean = oilModelBean
         binding.price.text = price
+        binding.actualPrice.text = price
         binding.operator.text = oilerBean?.name
         binding.oilsRise.text = oilsRise
 
@@ -104,13 +106,15 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
                     oilModelBean?.model,
                     oilModelBean?.typeId,
                     oilerBean?.name,
-                    price.toDouble(),
+                    collectionDiscountBean?.actual ?: price.toDouble(),
                     price.toDouble(),
                     memberManageBean?.phone,
                     payMode,
                     oilsRise.substring(1, oilsRise.length - 1).toDouble(),
                     oilModelBean?.price,
-                    oilGunBean?.oilGunNumber
+                    oilGunBean?.oilGunNumber,
+                    collectionDiscountBean?.integral ?: 0,
+                    collectionDiscountBean?.discount ?: 0.00,
                 )
             }
         }
@@ -134,6 +138,9 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
         }
 
         model.apply {
+            if (memberManageBean != null) {
+                getRefuelingDiscount(price.toDouble(), oilModelBean?.id, memberManageBean?.id)
+            }
             requestOrderNo.observe(this@CollectionOrderActivity) {
                 loadDialog.dismiss()
                 orderNo = it
@@ -146,13 +153,23 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
                         )
                     }
                     "通用钱包支付" -> {
-                        model.cardPayment(orderNo, memberManageBean?.phone, price.toDouble())
+                        model.cardPayment(
+                            orderNo,
+                            memberManageBean?.phone,
+                            this@CollectionOrderActivity.collectionDiscountBean?.actual
+                                ?: price.toDouble(),
+                            this@CollectionOrderActivity.collectionDiscountBean?.integral
+                                ?: 0
+                        )
                     }
                     else -> {
                         model.oidCardPayment(
                             orderNo,
                             memberManageBean?.phone,
-                            price.toDouble(),
+                            this@CollectionOrderActivity.collectionDiscountBean?.actual
+                                ?: price.toDouble(),
+                            this@CollectionOrderActivity.collectionDiscountBean?.integral
+                                ?: 0,
                             oilModelBean?.typeId
                         )
                     }
@@ -178,8 +195,11 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
             requestResult.observe(this@CollectionOrderActivity) {
                 loadDialog.dismiss()
             }
-            requestResult.observe(this@CollectionOrderActivity) {
-                loadDialog.dismiss()
+            collectionDiscountBean.observe(this@CollectionOrderActivity) {
+                binding.discountPrice.text = it.discount.toString()
+                binding.integral.text = it.integral.toString()
+                binding.actualPrice.text = it.actual.toString()
+                this@CollectionOrderActivity.collectionDiscountBean = it
             }
         }
 

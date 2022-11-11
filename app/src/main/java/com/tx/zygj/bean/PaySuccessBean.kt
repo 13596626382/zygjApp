@@ -25,6 +25,7 @@ data class PaySuccessBean(
     val cardType: Int = 0, //钱包充值类型
     val receivable: String? = null, //钱包充值应收金额
     val give: String? = null, //钱包充值赠送金额
+    val giveIntegral: String? = null, //钱包充值赠送积分
     val money: String? = null, //钱包充值实收金额
     val gunNumber: String? = null, //油枪号
     val memberName: String? = null, //会员名称
