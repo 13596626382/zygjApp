@@ -290,6 +290,7 @@ interface Api {
      *  @param gunNumber 加油枪号
      *  @param integral 赠送积分
      *  @param discount 优惠金额
+     *  @param preferentialMethod 最优解
      */
     @FormUrlEncoded
     @POST("pos/order/create")
@@ -307,6 +308,7 @@ interface Api {
         @Field("gunNumber") gunNumber: Int? = 0,
         @Field("integral") integral: Int? = 0,
         @Field("discount") discount: Double? = 0.00,
+        @Field("preferentialMethod") preferentialMethod: String? = "",
     ): ApiBean<String>
 
     /**
@@ -551,6 +553,6 @@ interface Api {
     suspend fun getRefuelingDiscount(
         @Field("totalPrice") totalPrice: Double?,
         @Field("oilId") oilId: Int?,
-        @Field("memberId") memberId: Int??
+        @Field("memberId") memberId: Int?
     ): ApiBean<CollectionDiscountBean>
 }

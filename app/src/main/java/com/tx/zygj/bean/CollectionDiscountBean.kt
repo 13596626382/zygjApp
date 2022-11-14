@@ -5,4 +5,5 @@ class CollectionDiscountBean(
     val totalPrice: Double,
     val discount: Double,
     val integral: Int,
+    val preferentialMethod: String,
 )

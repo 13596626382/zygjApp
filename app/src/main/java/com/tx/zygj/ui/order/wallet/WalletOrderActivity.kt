@@ -73,6 +73,9 @@ class WalletOrderActivity :
             mWalletOrderDialogFragment.onActivityClickListener = {
 //                model.getRechargeActivityDetails(it.id, price)
                 binding.activity.text = it.activityName
+                binding.activityGive.visibility = View.VISIBLE
+                binding.givePrice.text = it.give.toString()
+                binding.giveIntegral.text = it.giveIntegral.toString()
                 rechargeActivityBean = it
             }
             mWalletOrderDialogFragment.show(supportFragmentManager, CommonConstant.DIALOG_FRAGMENT)

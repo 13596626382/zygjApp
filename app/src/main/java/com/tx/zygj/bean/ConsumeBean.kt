@@ -5,4 +5,5 @@ data class ConsumeBean(
     val gasMan: String,
     val totalPrice: Double,
     val payDate: String,
+    val actual: String,
 )

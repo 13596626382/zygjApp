@@ -17,14 +17,14 @@ class CollectionOrderViewModel : BaseViewModel() {
         model: String?, typeId: Int?,
         gasMan: String?, actual: Double, totalPrice: Double,
         memberPhone: String?, payModel: String, oilsRise: Double, oilPrice: Double?,
-        gunNumber: Int?, integral: Int?, discount: Double?
+        gunNumber: Int?, integral: Int?, discount: Double?, preferentialMethod: String?
     ) {
         launch {
             val data = repository.generateOrder(
                 model, typeId, CommonConstant.getUserInfo()?.gasId,
                 gasMan, actual, totalPrice,
                 memberPhone, payModel, oilsRise, oilPrice,
-                gunNumber, integral, discount
+                gunNumber, integral, discount, preferentialMethod
             )
             if (data.code == 0) {
                 requestOrderNo.value = data.getData()

@@ -57,11 +57,7 @@ class MemberRegisterActivity :
                 toast("请填写用户名")
                 return@setOnSingleClickListener
             }
-            if (memberManageBean.phone == "") {
-                toast("请填写用户手机号")
-                return@setOnSingleClickListener
-            }
-            if (memberManageBean.phone?.length != 11) {
+            if (memberManageBean.phone.isPhone()) {
                 toast("用户手机号格式不正确")
                 return@setOnSingleClickListener
             }

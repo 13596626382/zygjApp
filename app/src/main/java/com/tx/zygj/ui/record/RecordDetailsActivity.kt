@@ -13,6 +13,7 @@ class RecordDetailsActivity :
     private val model: RecordDetailsViewModel by viewModels()
     private var type = 0
     override fun initData() {
+        binding.titleBarView.setOnBack(this)
         type = intentIntExtras("type")
         if (type == 0) {
             binding.titleBarView.setTitle("消费详情")

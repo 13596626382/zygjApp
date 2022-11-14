@@ -4,33 +4,14 @@ import com.tx.zygj.api.BaseRepository
 
 class CollectionOrderRepository : BaseRepository() {
     suspend fun generateOrder(
-        model: String?,
-        typeId: Int?,
-        gasId: Int?,
-        gasMan: String?,
-        actual: Double,
-        totalPrice: Double,
-        memberPhone: String?,
-        payModel: String,
-        oilsRise: Double,
-        oilPrice: Double?,
-        gunNumber: Int?,
-        integral: Int?,
-        discount: Double?
+        model: String?, typeId: Int?, gasId: Int?, gasMan: String?,
+        actual: Double, totalPrice: Double, memberPhone: String?, payModel: String,
+        oilsRise: Double, oilPrice: Double?, gunNumber: Int?, integral: Int?, discount: Double?, preferentialMethod: String?
     ) = retrofit.generateOrder(
-        model,
-        typeId,
-        gasId,
-        gasMan,
-        actual,
-        totalPrice,
-        memberPhone,
-        payModel,
-        oilsRise,
-        oilPrice,
-        gunNumber,
-        integral,
-        discount
+        model, typeId, gasId, gasMan, actual,
+        totalPrice, memberPhone, payModel,
+        oilsRise, oilPrice, gunNumber,
+        integral, discount, preferentialMethod
     )
 
     suspend fun getRefuelingDiscount(

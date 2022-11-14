@@ -9,4 +9,5 @@ data class MemberRechargeRecordBean (
     val openId: String,
     val status: Int,
     val rechargeType: String,
+    val actual: String,
         )
