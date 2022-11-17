@@ -17,7 +17,8 @@ class MemberIntegralRecordActivity :
     override fun initData() {
         binding.titleBar.setOnBack(this)
         binding.recyclerView.bind(MemberIntegralRecordAdapter()) {
-        }.setList(listOf("", "", "", "", ""))
+            setList(listOf("", "", "", "", ""))
+        }
         binding.selectDate.showDateDialog(true) {
             binding.selectDate.text = it.toYMDateString()
         }

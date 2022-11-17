@@ -23,8 +23,8 @@ class ShopCashierActivity :
             startActivity<CouponActivity>()
         }
         binding.recyclerView.bind(ShopCashierAdapter()) {
-
-        }.setList(listOf(ShopBean("1", 1),ShopBean("1", 1),ShopBean("1", 1)))
+            setList(listOf(ShopBean("1", 1),ShopBean("1", 1),ShopBean("1", 1)))
+        }
     }
 
 

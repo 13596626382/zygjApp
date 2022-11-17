@@ -2,7 +2,7 @@ package com.tx.zygj.ui.login
 
 import androidx.activity.viewModels
 import com.llx.common.base.BaseActivity
-import com.llx.common.util.activityList
+import com.llx.common.util.finishAllActivity
 import com.llx.common.util.showLoadingDialog
 import com.llx.common.util.startActivity
 import com.lxj.xpopup.impl.LoadingPopupView
@@ -43,16 +43,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             loadDialog.dismiss()
             if (it) {
                 startActivity<MainActivity>()
-                finish()
+                finishAllActivity()
             }
         }
 
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        activityList.forEach {
-            it.finish()
-        }
+    override fun getBackEnabled() = true
+
+    override fun onBack() {
+        finishAllActivity()
     }
 }

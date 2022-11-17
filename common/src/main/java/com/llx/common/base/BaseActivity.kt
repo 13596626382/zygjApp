@@ -6,13 +6,12 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.llx.common.util.activityCache
-import com.llx.common.util.showLoadingDialog
-import com.lxj.xpopup.impl.LoadingPopupView
 import com.lxj.xpopup.util.KeyboardUtils
 import com.zackratos.ultimatebarx.ultimatebarx.statusBarOnly
 
@@ -34,6 +33,11 @@ abstract class BaseActivity<DB : ViewDataBinding>(@LayoutRes val layoutRes: Int)
             light = getLight()
         }
         activityCache.add(this)
+        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(getBackEnabled()) {
+            override fun handleOnBackPressed() {
+                onBack()
+            }
+        })
         mContext = this
         initData()
     }
@@ -44,12 +48,13 @@ abstract class BaseActivity<DB : ViewDataBinding>(@LayoutRes val layoutRes: Int)
 
     open fun getLight() = true
 
-    abstract fun initData()
+    //是否拦截返回事件
+    open fun getBackEnabled() = false
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        activityCache.remove(this)
+    open fun onBack() {
     }
+
+    abstract fun initData()
 
     override fun onResume() {
         super.onResume()

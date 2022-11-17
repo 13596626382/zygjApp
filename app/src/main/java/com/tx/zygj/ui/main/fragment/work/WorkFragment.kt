@@ -9,6 +9,7 @@ import com.llx.common.util.setOnSingleClickListener
 import com.llx.common.util.startActivity
 import com.llx.common.util.toast
 import com.tx.zygj.R
+import com.tx.zygj.bean.TtsBean
 import com.tx.zygj.databinding.FragmentWorkBinding
 import com.tx.zygj.ui.cashier.fast.FastCashierActivity
 import com.tx.zygj.ui.cashier.refueling.RefuelingCashierActivity
@@ -19,6 +20,7 @@ import com.tx.zygj.ui.scan.ScanCodeActivity
 import com.tx.zygj.ui.search.SearchActivity
 import com.tx.zygj.ui.wallet.WalletRechargeActivity
 import com.tx.zygj.util.OcrUtil
+import org.greenrobot.eventbus.EventBus
 
 
 class WorkFragment : BaseFragment<FragmentWorkBinding>(R.layout.fragment_work) {

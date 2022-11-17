@@ -72,7 +72,12 @@ inline fun <reified T : Parcelable> Activity.intentParcelableArrayListExtras(nam
         intent.getParcelableArrayListExtra(name)
     }
 
-fun AppCompatActivity.onBack() {
+fun finishAllActivity() {
+    activityCache.forEach { it.finish() }
+}
+
+fun AppCompatActivity.onBackActivity() {
+    activityCache.remove(this)
     onBackPressedDispatcher.onBackPressed()
 }
 

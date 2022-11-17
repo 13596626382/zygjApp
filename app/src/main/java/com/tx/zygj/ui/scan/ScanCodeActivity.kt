@@ -32,7 +32,7 @@ class ScanCodeActivity : BaseActivity<ActivitySacnCodeBinding>(R.layout.activity
                     val intent = Intent()
                     intent.putExtra(CommonConstant.SCAN_CODE, it.text)
                     setResult(CommonConstant.REQUEST_CODE, intent)
-                    onBack()
+                    onBackActivity()
                 } else {
                     if (it.text.startsWith("phone")) {
                         popupView.show()
@@ -57,7 +57,7 @@ class ScanCodeActivity : BaseActivity<ActivitySacnCodeBinding>(R.layout.activity
         model.memberManageBean.observe(this) {
             popupView.dismiss()
             startActivity<MemberInformationActivity>(CommonConstant.MEMBER_ID to it.id)
-            onBack()
+            onBackActivity()
         }
         checkPermission()
     }

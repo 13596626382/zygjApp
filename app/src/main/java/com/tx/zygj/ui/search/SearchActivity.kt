@@ -29,7 +29,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
                 val intent = Intent()
                 intent.putExtra(CommonConstant.MEMBER_BEAN, mAdapter.data[position])
                 setResult(CommonConstant.REQUEST_CODE, intent)
-                onBack()
+                onBackActivity()
             } else {
                 startActivity<MemberInformationActivity>(CommonConstant.MEMBER_ID to mAdapter.data[position].id)
             }

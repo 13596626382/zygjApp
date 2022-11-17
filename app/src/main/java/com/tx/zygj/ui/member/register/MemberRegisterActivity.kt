@@ -78,7 +78,7 @@ class MemberRegisterActivity :
             memberManageBean.state = if (binding.state.isChecked) "1" else "0"
 
             model.requestResult.observe(this) {
-                onBack()
+                onBackActivity()
             }
         }
     }

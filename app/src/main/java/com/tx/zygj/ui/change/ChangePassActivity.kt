@@ -3,7 +3,7 @@ package com.tx.zygj.ui.change
 import androidx.activity.viewModels
 import com.llx.common.CommonConstant
 import com.llx.common.base.BaseActivity
-import com.llx.common.util.onBack
+import com.llx.common.util.onBackActivity
 import com.llx.common.util.textString
 import com.llx.common.util.toast
 import com.tx.zygj.R
@@ -47,7 +47,7 @@ class ChangePassActivity : BaseActivity<ActivityChangePassBinding>(R.layout.acti
             model.changePass(phone, passWord, newPassWord, confirmPassword)
 
             model.requestResult.observe(this) {
-                onBack()
+                onBackActivity()
             }
         }
     }

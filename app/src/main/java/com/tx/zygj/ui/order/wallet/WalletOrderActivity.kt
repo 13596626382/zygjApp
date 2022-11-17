@@ -106,7 +106,7 @@ class WalletOrderActivity :
                     CommonConstant.MEMBER_BEAN to memberManageBean,
                     "paySuccessBean" to it
                 )
-                onBack()
+                onBackActivity()
             }
             requestResult.observe(this@WalletOrderActivity) {
                 loadDialog.dismiss()

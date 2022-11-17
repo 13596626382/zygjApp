@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import com.llx.common.CommonConstant
 import com.llx.common.base.BaseActivity
 import com.llx.common.util.bind
-import com.llx.common.util.onBack
+import com.llx.common.util.onBackActivity
 import com.llx.common.util.setOnSingleClickListener
 import com.llx.common.util.toast
 import com.tx.zygj.R
@@ -49,7 +49,7 @@ class OilSettingActivity : BaseActivity<ActivityOilSettingBinding>(R.layout.acti
             fragment.show(supportFragmentManager, CommonConstant.DIALOG_FRAGMENT)
         }
         model.requestResult.observe(this) {
-            onBack()
+            onBackActivity()
         }
     }
 }

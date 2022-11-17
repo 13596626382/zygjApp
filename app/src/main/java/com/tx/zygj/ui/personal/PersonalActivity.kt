@@ -5,7 +5,7 @@ import com.llx.common.CommonConstant
 import com.llx.common.base.BaseActivity
 import com.llx.common.bean.UserInfoBean
 import com.llx.common.util.addAfterTextChanged
-import com.llx.common.util.onBack
+import com.llx.common.util.onBackActivity
 import com.llx.common.util.setOnSingleClickListener
 import com.llx.common.util.toast
 import com.tx.zygj.R
@@ -63,7 +63,7 @@ class PersonalActivity : BaseActivity<ActivityPersonalBinding>(R.layout.activity
             model.updatePersonal(userInfoBean)
         }
         model.requestResult.observe(this) {
-            onBack()
+            onBackActivity()
         }
     }
 }

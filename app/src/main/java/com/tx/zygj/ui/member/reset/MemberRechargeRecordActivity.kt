@@ -29,7 +29,8 @@ class MemberRechargeRecordActivity :
             setOnItemClickListener { _, _, position ->
                 startActivity<RecordDetailsActivity>("record_id" to data[position].id, "type" to 1)
             }
-        }.setEmptyView(R.layout.view_empty)
+            setEmptyView(R.layout.view_empty)
+        }
         model.apply {
             findRecharges(memberPhone)
             memberRechargeRecordBean.observe(this@MemberRechargeRecordActivity) {

@@ -48,7 +48,8 @@ class MemberConsumeActivity :
             setOnItemClickListener { _, _, position ->
                 startActivity<RecordDetailsActivity>("record_id" to data[position].id, "type" to 0)
             }
-        }.setEmptyView(R.layout.view_empty)
+            setEmptyView(R.layout.view_empty)
+        }
         binding.selectDate.showDateDialog(true) {
             binding.date.text = it.toYMDateString()
             currentDate = it.toYMDateString()

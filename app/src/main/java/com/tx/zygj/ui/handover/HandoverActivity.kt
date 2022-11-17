@@ -27,7 +27,7 @@ class HandoverActivity : BaseActivity<ActivityHandoverBinding>(R.layout.activity
             toCurrentYMDHMSDate()
         )
         popUpView = showLoadingDialog("打印交班结果")
-        binding.shiftHandover.showConfirmDialog("交班", "是否交班") {
+        binding.shiftHandover.showConfirmDialog(content = "是否交班") {
             val fragment = PowerDialogFragment()
             fragment.onPassWordCorrect = {
                 popUpView.show()

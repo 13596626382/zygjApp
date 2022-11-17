@@ -18,7 +18,8 @@ class OilerDialogFragment : BaseDialogFragment<DialogOilerBinding>(R.layout.dial
                 onClickListener.invoke(mAdapter.data[position])
                 dismiss()
             }
-        }.setList(argumentsParcelableArrayList("oilerListBean"))
+            setList(argumentsParcelableArrayList("oilerListBean"))
+        }
 
         binding.cancel.setOnSingleClickListener { dismiss() }
     }

@@ -70,14 +70,15 @@ class WalletRechargeActivity :
                 cardType = position
                 notifyDataSetChanged()
             }
-        }.setList(
-            arrayListOf(
-                WalletRechargeTypeBean("汽油", true),
-                WalletRechargeTypeBean("柴油"),
-                WalletRechargeTypeBean("通用钱包"),
-                WalletRechargeTypeBean("天然气")
+            setList(
+                arrayListOf(
+                    WalletRechargeTypeBean("汽油", true),
+                    WalletRechargeTypeBean("柴油"),
+                    WalletRechargeTypeBean("通用钱包"),
+                    WalletRechargeTypeBean("天然气")
+                )
             )
-        )
+        }
         binding.moneyRecyclerView.bindGrid(mMoneyAdapter, 3) {
             setOnItemClickListener { _, _, position ->
                 if (data[position].isCheck) return@setOnItemClickListener
@@ -92,7 +93,6 @@ class WalletRechargeActivity :
                 binding.keyboard.visibility = View.GONE
                 notifyDataSetChanged()
             }
-        }.apply {
             footerViewAsFlow = true
             setList(
                 arrayListOf(

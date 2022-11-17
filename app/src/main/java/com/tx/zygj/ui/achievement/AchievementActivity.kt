@@ -27,7 +27,7 @@ class AchievementActivity :
             toCurrentYMDHMSDate()
         )
         popUpView = showLoadingDialog("打印小票")
-        binding.shiftHandover.showConfirmDialog("", "是否小票") {
+        binding.shiftHandover.showConfirmDialog(content = "是否小票") {
             SunmiPrintHelper.sendShiftHandoverRawData(binding.handoverBean)
         }
 

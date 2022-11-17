@@ -46,13 +46,13 @@ class AddCarBrandActivity :
         }
 
         binding.titleBar.onImageClickListener = {
-            showConfirmDialog("删除车牌","确认删除车牌信息") {
+            showConfirmDialog(content = "确认删除车牌信息") {
                 model.deleteCarNumber(carBrandBean?.id)
             }
         }
 
         model.requestResult.observe(this) {
-            onBack()
+            onBackActivity()
         }
     }
 }

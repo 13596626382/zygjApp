@@ -13,7 +13,7 @@ class CouponActivity : BaseActivity<ActivityCouponBinding>(R.layout.activity_cou
     override fun initData() {
         binding.titleBar.setOnBack(this)
         binding.recyclerView.bind(CouponAdapter()) {
-
-        }.setList(listOf("","","",""))
+            setList(listOf("","","",""))
+        }
     }
 }

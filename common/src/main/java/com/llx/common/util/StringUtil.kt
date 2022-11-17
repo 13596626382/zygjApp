@@ -11,5 +11,3 @@ fun stringBuild(vararg s: Any?) = buildString { append(*s) }
 fun String.subPoint() = if (substring(indexOf("."), length) == ".00") {
     substring(0, indexOf("."))
 } else this
-
-

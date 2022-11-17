@@ -30,11 +30,9 @@ class SplashActivity : BaseActivity<ActivityLaunchBinding>(R.layout.activity_lau
             if (isNetworkAvailable) {
                 delay(1000)
                 binding.retry.visibility = View.INVISIBLE
-//                SpeechSynthesizerUtil.init(this@SplashActivity)
                 OcrUtil.init(this@SplashActivity)
                 NotificationUtil.init(this@SplashActivity)
                 SunmiPrintHelper.init(this@SplashActivity)
-//                TtsUtil.init(this@SplashActivity)
 
                 val userInfo = readContent(DatastoreUtil.USER_INFO)
                 val printBean = readContent(DatastoreUtil.PRINT_SETTING)
@@ -51,7 +49,7 @@ class SplashActivity : BaseActivity<ActivityLaunchBinding>(R.layout.activity_lau
                     startActivity<LoginActivity>()
                 }
 
-                onBack()
+                onBackActivity()
 
             } else {
                 toast("无网络连接请检查网络连接状态")

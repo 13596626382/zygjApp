@@ -143,7 +143,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         unregisterReceiver(networkReceiver)
     }
 
-    override fun onBackPressed() {
+    override fun getBackEnabled() = true
+
+    override fun onBack() {
         if ((System.currentTimeMillis() - mLastTime) > mDuraction) {
             toast("再按一次退出")
             mLastTime = System.currentTimeMillis()
@@ -155,6 +157,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             finish()
         }
     }
-
 
 }

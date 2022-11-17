@@ -16,7 +16,8 @@ class StringDialogFragment : BaseDialogFragment<DialogStringBinding>(R.layout.di
                 onSelectStringResult?.invoke(data[position], position)
                 dismiss()
             }
-        }.setList(argumentsStringArraylist(CommonConstant.STRING_DIALOG_DATA))
+            setList(argumentsStringArraylist(CommonConstant.STRING_DIALOG_DATA))
+        }
     }
 
     override fun getDialogWidth() = WindowManager.LayoutParams.MATCH_PARENT

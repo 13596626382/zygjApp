@@ -13,7 +13,7 @@ import com.lxj.xpopup.core.BasePopupView
 
 fun View.setOnBackActivity(activity: AppCompatActivity) {
     this.setOnSingleClickListener {
-        activity.onBack()
+        activity.onBackActivity()
     }
 }
 //禁止连续点击

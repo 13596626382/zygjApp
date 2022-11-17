@@ -60,7 +60,7 @@ object WebSocketUtil {
             connect()
             reconnect_num++
         } else {
-            "重连失败".runOnUiThread()
+            "远程打印重连失败".runOnUiThread()
             EventBus.getDefault().post(EventBusBean(1))
         }
     }

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.llx.common.CommonConstant
 import com.llx.common.base.BaseViewModel
 import com.llx.common.util.DatastoreUtil
+import com.llx.common.util.activityList
 import com.llx.common.util.startActivity
 import com.llx.common.util.writeContent
 import com.lxj.xpopup.impl.LoadingPopupView

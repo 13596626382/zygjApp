@@ -183,7 +183,7 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
                     CommonConstant.MEMBER_BEAN to memberManageBean,
                     "paySuccessBean" to it
                 )
-                onBack()
+                onBackActivity()
             }
             requestResult.observe(this@CollectionOrderActivity) {
                 loadDialog.dismiss()
@@ -195,7 +195,6 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
                 this@CollectionOrderActivity.collectionDiscountBean = it
             }
         }
-
     }
 
     private fun resetLayout() {

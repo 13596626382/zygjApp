@@ -13,7 +13,7 @@ class WriteOffRecordActivity :
     override fun initData() {
         binding.titleBar.setOnBack(this)
         binding.recyclerView.bind(WriteOffRecordAdapter()) {
-
-        }.setList(listOf("", "", ""))
+            setList(listOf("", "", ""))
+        }
     }
 }

@@ -19,7 +19,7 @@ class MemberRechargeRecordAdapter :
         item: MemberRechargeRecordBean,
         position: Int
     ) {
-        binding.delete.showConfirmDialog("", "删除该条记录") {
+        binding.delete.showConfirmDialog(content = "删除该条记录") {
             onDeleteClickListener?.invoke(item, position)
         }
     }
