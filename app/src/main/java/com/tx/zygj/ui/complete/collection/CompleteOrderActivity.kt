@@ -23,7 +23,7 @@ class CompleteOrderActivity :
         paySuccessBean = intentParcelableExtras("paySuccessBean")
         binding.memberBeam = memberManageBean
         binding.paySuccessBean = paySuccessBean
-        binding.operator.text = CommonConstant.getUserInfo()?.name
+
         binding.oilType.text = stringBuild(
             paySuccessBean?.model, "#", when (paySuccessBean?.typeId) {
                 1 -> "汽油"

@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.net.ConnectException
 import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 abstract class BaseViewModel : ViewModel() {
     var requestResult = MutableLiveData<Boolean>()
@@ -18,8 +19,7 @@ abstract class BaseViewModel : ViewModel() {
         launch(block, null)
     }
 
-
-   protected fun launch(
+    protected fun launch(
         block: suspend CoroutineScope.() -> Unit,
         error: (Throwable.() -> Unit)? = null,
     ) {
@@ -31,9 +31,10 @@ abstract class BaseViewModel : ViewModel() {
                     toast("网络连接中断")
                     noNetwork.value = true
                 }
-                when(e) {
+                when (e) {
                     is SocketTimeoutException -> toast("网络连接超时")
                     is ConnectException -> toast("服务器异常")
+                    is UnknownHostException -> toast("网络异常，请检查网络是否通畅")
                 }
                 requestResult.value = false
                 error?.invoke(e)
