@@ -4,14 +4,14 @@ import android.content.Intent
 import androidx.activity.viewModels
 import com.llx.common.CommonConstant
 import com.llx.common.base.BaseActivity
-import com.llx.common.util.setOnSingleClickListener
-import com.llx.common.util.showLoadingDialog
-import com.llx.common.util.toast
+import com.llx.common.util.*
 import com.lxj.xpopup.impl.LoadingPopupView
 import com.tx.zygj.R
+import com.tx.zygj.bean.TtsBean
 import com.tx.zygj.databinding.ActivityFastCashierBinding
 import com.tx.zygj.ui.scan.ScanCodeActivity
 import com.tx.zygj.util.SunmiPrintHelper
+import org.greenrobot.eventbus.EventBus
 
 
 /**
@@ -23,6 +23,7 @@ class FastCashierActivity :
     private lateinit var loadDialog: LoadingPopupView
 
     private var keyboardNumber = ""
+    private var price = "" //记录金额是否有变化
     private var orderNo = ""
     override fun initData() {
         binding.titleBar.setOnBack(this)
@@ -31,20 +32,33 @@ class FastCashierActivity :
                 toast("请输入正确的加油金额")
                 return@setOnSingleClickListener
             }
-            model.getFastOrder(keyboardNumber.toDouble())
+            if (orderNo != "" && price == keyboardNumber) {
+                model.requestOrderNo.value = orderNo
+                logE("没有改变")
+            } else {
+                logE("改变了")
+                price = keyboardNumber
+                model.getFastOrder(price.toDouble())
+            }
         }
-        model.orderNo.observe(this) {
-            orderNo = it
-            startActivityForResult(
-                Intent(mContext, ScanCodeActivity::class.java).putExtra(
-                    CommonConstant.SCAN_TYPE, true
-                ), CommonConstant.REQUEST_CODE
-            )
-        }
-        model.paySuccessBean.observe(this) {
-            loadDialog.dismiss()
-//            EventBus.getDefault().post(TtsBean(stringBuild("收款", it.actual, "元欢迎下次光临"), it.orderNo))
-            SunmiPrintHelper.sendFastCashierRawData(it)
+        model.apply {
+            requestOrderNo.observe(this@FastCashierActivity) {
+                orderNo = it
+                startActivityForResult(
+                    Intent(mContext, ScanCodeActivity::class.java).putExtra(
+                        CommonConstant.SCAN_TYPE, true
+                    ), CommonConstant.REQUEST_CODE
+                )
+            }
+            paySuccessBean.observe(this@FastCashierActivity) {
+                orderNo = ""
+                EventBus.getDefault()
+                    .post(TtsBean(stringBuild("收款", it.actual, "元欢迎下次光临"), it.orderNo))
+                SunmiPrintHelper.sendFastCashierRawData(it)
+            }
+            requestResult.observe(this@FastCashierActivity) {
+                loadDialog.dismiss()
+            }
         }
         keyboardView()
         binding.hundred.setOnSingleClickListener {
@@ -64,9 +78,6 @@ class FastCashierActivity :
             binding.money.text = "500"
         }
 
-        model.requestResult.observe(this) {
-            loadDialog.dismiss()
-        }
     }
 
     private fun keyboardView() {
@@ -138,7 +149,7 @@ class FastCashierActivity :
             if (code != null) {
                 loadDialog = showLoadingDialog("查询支付结果")
                 loadDialog.show()
-                model.fastPay(code, orderNo, keyboardNumber.toDouble())
+                model.fastPay(code, orderNo, price.toDouble())
             }
         }
     }

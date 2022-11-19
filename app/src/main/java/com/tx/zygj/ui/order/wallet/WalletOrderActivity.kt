@@ -55,13 +55,17 @@ class WalletOrderActivity :
 
         binding.settle.setOnSingleClickListener {
             loadDialog.show()
-            model.findOrderNo(
-                cardType,
-                memberManageBean?.phone,
-                price.toDouble(),
-                give = rechargeActivityBean?.give,
-                giveIntegral = rechargeActivityBean?.giveIntegral
-            )
+            if (orderNo != "") {
+                model.requestOrderNo.value = orderNo
+            } else {
+                model.findOrderNo(
+                    cardType,
+                    memberManageBean?.phone,
+                    price.toDouble(),
+                    give = rechargeActivityBean?.give,
+                    giveIntegral = rechargeActivityBean?.giveIntegral
+                )
+            }
         }
 
         binding.choiceActivity.setOnSingleClickListener {
@@ -93,6 +97,7 @@ class WalletOrderActivity :
                 )
             }
             paySuccessBean.observe(this@WalletOrderActivity) {
+                orderNo = ""
                 if (binding.tickets.isChecked) {
                     SunmiPrintHelper.sendWalletRawData(it, memberManageBean)
                 }
