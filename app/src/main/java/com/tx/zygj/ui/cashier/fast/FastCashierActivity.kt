@@ -6,12 +6,15 @@ import com.llx.common.CommonConstant
 import com.llx.common.base.BaseActivity
 import com.llx.common.util.setOnSingleClickListener
 import com.llx.common.util.showLoadingDialog
+import com.llx.common.util.stringBuild
 import com.llx.common.util.toast
 import com.lxj.xpopup.impl.LoadingPopupView
 import com.tx.zygj.R
+import com.tx.zygj.bean.TtsBean
 import com.tx.zygj.databinding.ActivityFastCashierBinding
 import com.tx.zygj.ui.scan.ScanCodeActivity
 import com.tx.zygj.util.SunmiPrintHelper
+import org.greenrobot.eventbus.EventBus
 
 
 /**
@@ -23,6 +26,7 @@ class FastCashierActivity :
     private lateinit var loadDialog: LoadingPopupView
 
     private var keyboardNumber = ""
+    private var price = ""
     private var orderNo = ""
     override fun initData() {
         binding.titleBar.setOnBack(this)
@@ -31,7 +35,12 @@ class FastCashierActivity :
                 toast("请输入正确的加油金额")
                 return@setOnSingleClickListener
             }
-            model.getFastOrder(keyboardNumber.toDouble())
+            if (orderNo != "" && price == keyboardNumber) {
+                model.orderNo.value = orderNo
+            } else {
+                price = keyboardNumber
+                model.getFastOrder(price.toDouble())
+            }
         }
         model.orderNo.observe(this) {
             orderNo = it
@@ -43,7 +52,7 @@ class FastCashierActivity :
         }
         model.paySuccessBean.observe(this) {
             loadDialog.dismiss()
-//            EventBus.getDefault().post(TtsBean(stringBuild("收款", it.actual, "元欢迎下次光临"), it.orderNo))
+            EventBus.getDefault().post(TtsBean(stringBuild("收款", it.actual, "元欢迎下次光临"), it.orderNo))
             SunmiPrintHelper.sendFastCashierRawData(it)
         }
         keyboardView()

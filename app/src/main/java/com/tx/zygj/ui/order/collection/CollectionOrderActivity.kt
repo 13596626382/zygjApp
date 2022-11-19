@@ -102,13 +102,17 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
                 toast("请选择支付方式")
             } else {
                 loadDialog.show()
-                model.generateOrder(
-                    oilModelBean?.model, oilModelBean?.typeId, oilerBean?.name,
-                    collectionDiscountBean?.actual ?: price.toDouble(), price.toDouble(), memberManageBean?.phone,
-                    payMode, oilsRise.substring(1, oilsRise.length - 1).toDouble(),
-                    oilModelBean?.price, oilGunBean?.oilGunNumber, collectionDiscountBean?.integral ?: 0,
-                    collectionDiscountBean?.discount ?: 0.00, collectionDiscountBean?.preferentialMethod ?: "无"
-                )
+                if (orderNo != "") {
+                    model.requestOrderNo.value = orderNo
+                } else {
+                    model.generateOrder(
+                        oilModelBean?.model, oilModelBean?.typeId, oilerBean?.name,
+                        collectionDiscountBean?.actual ?: price.toDouble(), price.toDouble(), memberManageBean?.phone,
+                        payMode, oilsRise.substring(1, oilsRise.length - 1).toDouble(),
+                        oilModelBean?.price, oilGunBean?.oilGunNumber, collectionDiscountBean?.integral ?: 0,
+                        collectionDiscountBean?.discount ?: 0.00, collectionDiscountBean?.preferentialMethod ?: "无"
+                    )
+                }
             }
         }
 
