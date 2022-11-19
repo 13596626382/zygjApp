@@ -8,13 +8,13 @@ import com.tx.zygj.bean.PaySuccessBean
 
 class FastCashierViewModel : BaseViewModel() {
     private val repository by lazy { FastCashierRepository() }
-    var requestOrderNo = MutableLiveData<String>()
+    var orderNo = MutableLiveData<String>()
     var paySuccessBean = MutableLiveData<PaySuccessBean>()
     fun getFastOrder(actual: Double) {
         launch {
             val data = repository.getFastOrder(actual)
             if (data.code == 0) {
-                requestOrderNo.value = data.getData()
+                orderNo.value = data.getData()
                 CommonConstant.setOrderNo(data.getData())
             }
         }
