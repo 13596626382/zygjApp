@@ -15,6 +15,9 @@ fun Fragment.argumentString(name: String) = arguments?.argumentString(name)
 
 fun Fragment.argumentBoolean(name: String) = arguments?.argumentBoolean(name)
 
+inline fun <reified T> Fragment.argumentParcelable(name: String) =
+    arguments?.argumentParcelable<T>(name)
+
 inline fun <reified T> Fragment.argumentsParcelableExtras(name: String): T =
     arguments!!.argumentsParcelableExtras(name)
 

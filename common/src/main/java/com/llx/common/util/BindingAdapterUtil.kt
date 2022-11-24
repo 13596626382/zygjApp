@@ -10,6 +10,10 @@ import com.llx.common.R
 fun setImage(view: ImageView, url: String?) {
     view.loadUrl(url)
 }
+@BindingAdapter("setImage1")
+fun setImage1(view: ImageView, url: String?) {
+    view.loadUrl1(url)
+}
 
 @BindingAdapter("setCircleImage")
 fun setCircleImage(view: ImageView, url: String?) {

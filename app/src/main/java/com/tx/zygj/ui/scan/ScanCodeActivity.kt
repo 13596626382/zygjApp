@@ -22,18 +22,19 @@ class ScanCodeActivity : BaseActivity<ActivitySacnCodeBinding>(R.layout.activity
     private lateinit var popupView: LoadingPopupView
     override fun initData() {
         popupView = showLoadingDialog("查询中")
+        val scanType = intentIntExtras(CommonConstant.SCAN_TYPE)
         mCameraScan = DefaultCameraScan(this, binding.previewView)
         mCameraScan.apply {
             setPlayBeep(true)
             setVibrate(true)
             setOnScanResultCallback {
                 logE(it.text)
-                if (intentBooleanExtras(CommonConstant.SCAN_TYPE)) {
+                if (scanType == 0) {
                     val intent = Intent()
                     intent.putExtra(CommonConstant.SCAN_CODE, it.text)
                     setResult(CommonConstant.REQUEST_CODE, intent)
                     onBackActivity()
-                } else {
+                } else if (scanType == 1) {
                     if (it.text.startsWith("phone")) {
                         popupView.show()
                         model.findByPhone(it.text.substring(5, it.text.length))

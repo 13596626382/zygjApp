@@ -9,7 +9,6 @@ import com.llx.common.util.setOnSingleClickListener
 import com.llx.common.util.startActivity
 import com.llx.common.util.toast
 import com.tx.zygj.R
-import com.tx.zygj.bean.TtsBean
 import com.tx.zygj.databinding.FragmentWorkBinding
 import com.tx.zygj.ui.cashier.fast.FastCashierActivity
 import com.tx.zygj.ui.cashier.refueling.RefuelingCashierActivity
@@ -18,9 +17,10 @@ import com.tx.zygj.ui.member.manage.MemberManageActivity
 import com.tx.zygj.ui.reconciliation.ReconciliationActivity
 import com.tx.zygj.ui.scan.ScanCodeActivity
 import com.tx.zygj.ui.search.SearchActivity
+import com.tx.zygj.ui.shop.manage.ShopManageActivity
+import com.tx.zygj.ui.shop.shop.ShopActivity
 import com.tx.zygj.ui.wallet.WalletRechargeActivity
 import com.tx.zygj.util.OcrUtil
-import org.greenrobot.eventbus.EventBus
 
 
 class WorkFragment : BaseFragment<FragmentWorkBinding>(R.layout.fragment_work) {
@@ -43,15 +43,13 @@ class WorkFragment : BaseFragment<FragmentWorkBinding>(R.layout.fragment_work) {
             startActivity<ReconciliationActivity>() //查看业绩
         }
         binding.shopManage.setOnSingleClickListener {
-//            startActivity<ShopActivity>() //商品管理
-            toast("功能暂未开通")
-            return@setOnSingleClickListener
+            startActivity<ShopManageActivity>() //商品管理
         }
         binding.search.setOnSingleClickListener {
             startActivity<SearchActivity>() //搜索
         }
         binding.scanCode.setOnSingleClickListener {
-            startActivity<ScanCodeActivity>() //二维码
+            startActivity<ScanCodeActivity>(CommonConstant.SCAN_TYPE to 1) //二维码
         }
         binding.cashier.setOnSingleClickListener {
             startActivity<RefuelingCashierActivity>() //加油收银
@@ -63,9 +61,7 @@ class WorkFragment : BaseFragment<FragmentWorkBinding>(R.layout.fragment_work) {
             startActivity<FastCashierActivity>() //快速收银
         }
         binding.shopCashier.setOnSingleClickListener {
-//            startActivity<ShopActivity>(CommonConstant.SHOP_TYPE to 1) //积分商品
-            toast("功能暂未开通")
-            return@setOnSingleClickListener
+            startActivity<ShopActivity>() //积分商品
         }
         binding.waller.setOnSingleClickListener {
             startActivity<WalletRechargeActivity>() //钱包充值

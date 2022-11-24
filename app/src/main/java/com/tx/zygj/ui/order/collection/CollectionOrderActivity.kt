@@ -106,11 +106,19 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
                     model.requestOrderNo.value = orderNo
                 } else {
                     model.generateOrder(
-                        oilModelBean?.model, oilModelBean?.typeId, oilerBean?.name,
-                        collectionDiscountBean?.actual ?: price.toDouble(), price.toDouble(), memberManageBean?.phone,
-                        payMode, oilsRise.substring(1, oilsRise.length - 1).toDouble(),
-                        oilModelBean?.price, oilGunBean?.oilGunNumber, collectionDiscountBean?.integral ?: 0,
-                        collectionDiscountBean?.discount ?: 0.00, collectionDiscountBean?.preferentialMethod ?: "无"
+                        oilModelBean?.model,
+                        oilModelBean?.typeId,
+                        oilerBean?.name,
+                        collectionDiscountBean?.actual ?: price.toDouble(),
+                        price.toDouble(),
+                        memberManageBean?.phone,
+                        payMode,
+                        oilsRise.substring(1, oilsRise.length - 1).toDouble(),
+                        oilModelBean?.price,
+                        oilGunBean?.oilGunNumber,
+                        collectionDiscountBean?.integral ?: 0,
+                        collectionDiscountBean?.discount ?: 0.00,
+                        collectionDiscountBean?.preferentialMethod ?: "无"
                     )
                 }
             }
@@ -145,7 +153,7 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
                     "扫码支付" -> {
                         startActivityForResult(
                             Intent(mContext, ScanCodeActivity::class.java).putExtra(
-                                CommonConstant.SCAN_TYPE, true
+                                CommonConstant.SCAN_TYPE, 0
                             ), CommonConstant.REQUEST_CODE
                         )
                     }
@@ -156,7 +164,8 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
                             this@CollectionOrderActivity.collectionDiscountBean?.actual
                                 ?: price.toDouble(),
                             this@CollectionOrderActivity.collectionDiscountBean?.integral
-                                ?: 0
+                                ?: 0,
+                            oilerBean?.id
                         )
                     }
                     else -> {
@@ -167,7 +176,8 @@ class CollectionOrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.acti
                                 ?: price.toDouble(),
                             this@CollectionOrderActivity.collectionDiscountBean?.integral
                                 ?: 0,
-                            oilModelBean?.typeId
+                            oilModelBean?.typeId,
+                            oilerBean?.id
                         )
                     }
                 }

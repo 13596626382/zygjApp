@@ -2,7 +2,8 @@ package com.llx.common.util
 
 import android.content.Context
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.llx.common.CommonConstant
 import com.llx.common.dialog.StringDialogFragment
 import com.lxj.xpopup.XPopup
@@ -17,6 +18,16 @@ import java.util.*
  */
 fun Context.showLoadingDialog(content: String) =
     XPopup.Builder(this)
+        .dismissOnBackPressed(false)
+        .isLightNavigationBar(true)
+        .asLoading(content, LoadingPopupView.Style.ProgressBar) as LoadingPopupView
+
+/**
+ * 加载框
+ * @param content 内容
+ */
+fun Fragment.showLoadingDialog(content: String) =
+    XPopup.Builder(context)
         .dismissOnBackPressed(false)
         .isLightNavigationBar(true)
         .asLoading(content, LoadingPopupView.Style.ProgressBar) as LoadingPopupView
@@ -51,21 +62,25 @@ inline fun View.showConfirmDialog(
  * 提示框Dialog
  * @param title 标题
  * @param content 内容
+ * @param isHideCancel 是否隐藏取消选择
  */
 inline fun showConfirmDialog(
     title: String = "提示",
     content: String,
     cancelBenText: String = "取消",
     confirmBtnText: String = "确定",
-    crossinline block: () -> Unit
+    isHideCancel: Boolean = false,
+    crossinline block: () -> Unit,
 ) {
     XPopup.Builder(topActivity.activity)
         .isDestroyOnDismiss(true)
+        .dismissOnBackPressed(false)
+        .dismissOnTouchOutside(false)
         .asConfirm(
             title, content,
             cancelBenText, confirmBtnText, {
                 block.invoke()
-            }, null, false
+            }, null, isHideCancel
         )
         .show()
 }
@@ -76,7 +91,7 @@ inline fun showConfirmDialog(
  */
 inline fun View.showDialog(
     data: ArrayList<String>,
-    activity: AppCompatActivity,
+    activity: FragmentActivity,
     crossinline block: (String, Int) -> Unit
 ) {
     setOnSingleClickListener {

@@ -4,9 +4,20 @@ import com.tx.zygj.api.BaseRepository
 
 class CollectionOrderRepository : BaseRepository() {
     suspend fun generateOrder(
-        model: String?, typeId: Int?, gasId: Int?, gasMan: String?,
-        actual: Double, totalPrice: Double, memberPhone: String?, payModel: String,
-        oilsRise: Double, oilPrice: Double?, gunNumber: Int?, integral: Int?, discount: Double?, preferentialMethod: String?
+        model: String?,
+        typeId: Int?,
+        gasId: Int?,
+        gasMan: String?,
+        actual: Double,
+        totalPrice: Double,
+        memberPhone: String?,
+        payModel: String,
+        oilsRise: Double,
+        oilPrice: Double?,
+        gunNumber: Int?,
+        integral: Int?,
+        discount: Double?,
+        preferentialMethod: String?
     ) = retrofit.generateOrder(
         model, typeId, gasId, gasMan, actual,
         totalPrice, memberPhone, payModel,
@@ -26,10 +37,16 @@ class CollectionOrderRepository : BaseRepository() {
         memberPhone: String?,
         actual: Double,
         integral: Int,
+        gasmanid: Int?,
     ) =
-        retrofit.cardPayment(orderNo, memberPhone, actual, integral)
+        retrofit.cardPayment(orderNo, memberPhone, actual, integral, gasmanid)
 
     suspend fun oidCardPayment(
-        orderNo: String, memberPhone: String?, actual: Double, integral: Int, typeId: Int?
-    ) = retrofit.oidCardPayment(orderNo, memberPhone, actual, integral, typeId)
+        orderNo: String,
+        memberPhone: String?,
+        actual: Double,
+        integral: Int,
+        typeId: Int?,
+        gasmanid: Int?,
+    ) = retrofit.oidCardPayment(orderNo, memberPhone, actual, integral, typeId, gasmanid)
 }

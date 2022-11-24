@@ -10,7 +10,7 @@ object CommonConstant {
     const val INTENT_TITLE = "intent_title"
     const val SHOP_TYPE = "shop_type"
     const val SEARCH_TYPE = "is_black"
-    const val SCAN_TYPE = "is_black"
+    const val SCAN_TYPE = "scan_type"
     const val MEMBER_ID = "member_id"
     const val MEMBER_PHONE = "member_phone"
     const val MEMBER_BEAN = "member_bean"

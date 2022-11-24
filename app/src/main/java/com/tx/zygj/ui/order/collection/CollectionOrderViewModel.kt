@@ -60,9 +60,15 @@ class CollectionOrderViewModel : BaseViewModel() {
         }
     }
 
-    fun cardPayment(orderNo: String, memberPhone: String?, actual: Double, integral: Int) {
+    fun cardPayment(
+        orderNo: String,
+        memberPhone: String?,
+        actual: Double,
+        integral: Int,
+        gasmanid: Int?
+    ) {
         launch {
-            val data = repository.cardPayment(orderNo, memberPhone, actual, integral)
+            val data = repository.cardPayment(orderNo, memberPhone, actual, integral, gasmanid)
             if (data.code == 0) {
                 paySuccessBean.value = data.getData()
             } else {
@@ -77,10 +83,12 @@ class CollectionOrderViewModel : BaseViewModel() {
         memberPhone: String?,
         actual: Double,
         integral: Int,
-        typeId: Int?
+        typeId: Int?,
+        gasmanid: Int?
     ) {
         launch {
-            val data = repository.oidCardPayment(orderNo, memberPhone, actual, integral, typeId)
+            val data =
+                repository.oidCardPayment(orderNo, memberPhone, actual, integral, typeId, gasmanid)
             if (data.code == 0) {
                 paySuccessBean.value = data.getData()
             } else {

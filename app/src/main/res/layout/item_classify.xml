@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="goodsClassifyBean"
+            type="com.tx.zygj.bean.ShopBean.ShopClassifyBean" />
+    </data>
+
+    <TextView
+        android:id="@+id/shop_classify"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="@{goodsClassifyBean.name}"
+        android:textColor="@color/color_939393"
+        android:textSize="12sp" />
+</layout>

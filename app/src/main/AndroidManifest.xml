@@ -46,8 +46,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.HOME" />-->
+                <!--                <category android:name="android.intent.category.DEFAULT" />-->
+                <!--                <category android:name="android.intent.category.HOME" />-->
             </intent-filter>
         </activity>
         <activity android:name=".ui.login.LoginActivity" />
@@ -58,7 +58,8 @@
         <activity android:name=".ui.coupon.CouponActivity" />
         <activity android:name=".ui.member.register.MemberRegisterActivity" />
         <activity android:name=".ui.cashier.fast.FastCashierActivity" />
-        <activity android:name=".ui.shop.ShopActivity" />
+        <activity android:name=".ui.shop.shop.ShopActivity" />
+        <activity android:name=".ui.shop.manage.ShopManageActivity" />
         <activity android:name=".ui.wallet.WalletRechargeActivity" />
         <activity android:name=".ui.member.manage.MemberManageActivity" />
         <activity android:name=".ui.car.manage.CarBrandManageActivity" />
@@ -69,7 +70,7 @@
         <activity android:name=".ui.member.exchange.MemberExchangeRecordActivity" />
         <activity android:name=".ui.member.integral.MemberIntegralRecordActivity" />
         <activity android:name=".ui.handover.HandoverActivity" />
-        <activity android:name=".ui.cashier.shop.ShopCashierActivity" />
+        <activity android:name=".ui.exchange.gift.GiftExchangeActivity" />
         <activity android:name=".ui.writeoff.WriteOffActivity" />
         <activity android:name=".ui.writeoff.record.WriteOffRecordActivity" />
         <activity android:name=".ui.integral.ManualIntegralActivity" />
@@ -93,6 +94,7 @@
         <activity android:name=".ui.achievements.AchievementsActivity" />
         <activity android:name=".ui.above.AboveActivity" />
         <activity android:name=".ui.voice.VoicePageActivity" />
+        <activity android:name=".ui.cashier.goods.GoodsCashierActivity"/>
 
         <receiver
             android:name=".receiver.NetworkConnectChangedReceiver"

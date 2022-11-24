@@ -46,7 +46,7 @@ class FastCashierActivity :
             orderNo = it
             startActivityForResult(
                 Intent(mContext, ScanCodeActivity::class.java).putExtra(
-                    CommonConstant.SCAN_TYPE, true
+                    CommonConstant.SCAN_TYPE, 0
                 ), CommonConstant.REQUEST_CODE
             )
         }

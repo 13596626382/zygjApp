@@ -11,6 +11,10 @@ fun ImageView.loadUrl(url: String?) {
     Glide.with(this).load(url).error(R.mipmap.ic_launcher).into(this)
 }
 
+fun ImageView.loadUrl1(url: String?) {
+    Glide.with(this).load(url).error(R.drawable.icon_add_image).into(this)
+}
+
 fun ImageView.loadCircleUrl(url: String?) {
     Glide.with(this).load(url).error(R.mipmap.ic_launcher).apply(
         RequestOptions.bitmapTransform(CircleCrop())

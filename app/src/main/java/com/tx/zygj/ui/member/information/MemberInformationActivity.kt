@@ -13,6 +13,7 @@ import com.tx.zygj.ui.car.manage.CarBrandManageActivity
 import com.tx.zygj.ui.cashier.fast.FastCashierActivity
 import com.tx.zygj.ui.cashier.refueling.RefuelingCashierActivity
 import com.tx.zygj.ui.member.consume.MemberConsumeActivity
+import com.tx.zygj.ui.member.exchange.MemberExchangeRecordActivity
 import com.tx.zygj.ui.member.register.MemberRegisterActivity
 import com.tx.zygj.ui.member.reset.MemberRechargeRecordActivity
 import com.tx.zygj.ui.wallet.WalletRechargeActivity
@@ -65,9 +66,7 @@ class MemberInformationActivity :
             startActivity<MemberRechargeRecordActivity>(CommonConstant.MEMBER_PHONE to binding.memberBean?.phone) //充值记录
         }
         binding.exchange.setOnSingleClickListener {
-            toast("功能开发中")
-            return@setOnSingleClickListener
-//            startActivity<MemberExchangeRecordActivity>() //兑换记录
+            startActivity<MemberExchangeRecordActivity>() //兑换记录
         }
         binding.integral.setOnSingleClickListener {
             toast("功能开发中")

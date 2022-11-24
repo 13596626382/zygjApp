@@ -11,6 +11,12 @@ fun Bundle.argumentString(name: String) = getString(name)
 
 fun Bundle.argumentBoolean(name: String) = getBoolean(name, false)
 
+inline fun <reified T> Bundle.argumentParcelable(name: String) = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+    getParcelable(name, T::class.java)
+} else {
+    getParcelable(name)
+} as T
+
 
 inline fun <reified T> Bundle.argumentsParcelableExtras(name: String): T =
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

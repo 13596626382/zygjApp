@@ -76,6 +76,7 @@ class RefreshView<T>(context: Context, attrs: AttributeSet?) :
     }
 
     fun loaData() {
+        mPageCount = mDefaultPageCount
         mViewModel.openLoadData(mPageCount)
     }
 

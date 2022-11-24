@@ -14,7 +14,7 @@ import com.llx.common.util.setOnBackActivity
 class TitleBarView(context: Context, attrs: AttributeSet?) :
     FrameLayout(context, attrs) {
     private val titleBarView: ViewTitleBarBinding
-    var onImageClickListener: (View.()-> Unit)? = null
+    var onImageClickListener: (View.() -> Unit)? = null
 
     init {
         val array = context.obtainStyledAttributes(attrs, R.styleable.TitleBarView)
@@ -47,5 +47,9 @@ class TitleBarView(context: Context, attrs: AttributeSet?) :
 
     fun setImageGone() {
         titleBarView.image.visibility = INVISIBLE
+    }
+
+    fun setRightText(text: String?) {
+        titleBarView.text.text = text
     }
 }

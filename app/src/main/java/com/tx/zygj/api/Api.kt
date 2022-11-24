@@ -1,10 +1,13 @@
 package com.tx.zygj.api
 
+
+import com.llx.common.CommonConstant
 import com.llx.common.api.ApiBean
 import com.llx.common.api.RefreshApiBean
 import com.llx.common.bean.PrintBean
 import com.llx.common.bean.UserInfoBean
 import com.tx.zygj.bean.*
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
 
@@ -352,6 +355,7 @@ interface Api {
      * @param memberPhone 会员手机号
      * @param actual 支付金额
      * @param typeId 加油卡类型
+     * @param gasmanid 加油员id
      */
     @FormUrlEncoded
     @POST("my/order/card")
@@ -360,7 +364,8 @@ interface Api {
         @Field("memberPhone") memberPhone: String?,
         @Field("actual") actual: Double,
         @Field("integral") integral: Int,
-        @Field("typeId") typeId: Int?
+        @Field("typeId") typeId: Int?,
+        @Field("gasmanid") gasmanid: Int?
     ): ApiBean<PaySuccessBean>
 
 
@@ -369,6 +374,7 @@ interface Api {
      * @param orderNo 订单号
      * @param memberPhone 会员手机号
      * @param actual 支付金额
+     * @param gasmanid 加油员id
      */
     @FormUrlEncoded
     @POST("my/order/cardPayment")
@@ -376,8 +382,9 @@ interface Api {
         @Field("OrderNo") orderNo: String,
         @Field("memberPhone") memberPhone: String?,
         @Field("actual") actual: Double,
-        @Field("integral") integral: Int
-        ): ApiBean<PaySuccessBean>
+        @Field("integral") integral: Int,
+        @Field("gasmanid") gasmanid: Int?
+    ): ApiBean<PaySuccessBean>
 
 
     /**
@@ -385,7 +392,8 @@ interface Api {
      * @param authCode 微信付款码
      * @param tradeNo 订单号
      * @param totalFee 总金额
-     * @param state 类型 0 消费 1 充值
+     * @param state 类型 0 消费 1 充值 2 快速收银
+     *
      */
     @FormUrlEncoded
     @POST("pos/tradePay/pay")
@@ -395,24 +403,6 @@ interface Api {
         @Field("totalFee") totalFee: Double,
         @Field("state") state: Int = 0,
     ): ApiBean<PaySuccessBean>
-
-
-    /**
-     * 快速收银支付
-     * @param authCode 微信付款码
-     * @param tradeNo 订单号
-     * @param totalFee 总金额
-     * @param state 类型 0 消费 1 充值
-     */
-    @FormUrlEncoded
-    @POST("pos/tradePay/pay")
-    suspend fun fastPay(
-        @Field("authCode") authCode: String,
-        @Field("tradeNo") tradeNo: String,
-        @Field("totalFee") totalFee: Double,
-        @Field("state") state: Int = 2,
-    ): ApiBean<PaySuccessBean>
-
 
     /**
      * 交班信息
@@ -555,4 +545,227 @@ interface Api {
         @Field("oilId") oilId: Int?,
         @Field("memberId") memberId: Int?
     ): ApiBean<CollectionDiscountBean>
+
+    /**
+     * 获取商品分类
+     * @param gasId 油站id
+     * @param goodsOrGift 商品分类 1商品 2礼品
+     */
+    @FormUrlEncoded
+    @POST("admin/goods/findGoodsClassify")
+    suspend fun getGoodsClassify(
+        @Field("goodsOrGift") goodsOrGift: Int,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<ArrayList<GoodsClassifyBean>>
+
+    /**
+     * 添加商品分类
+     * @param classifyName 分类名称
+     * @param gasId 油站id
+     * @param goodsOrGift 商品分类 0礼品 1商品
+     */
+    @FormUrlEncoded
+    @POST("admin/goods/saveGoodsClassify")
+    suspend fun addGoodsClassify(
+        @Field("classifyName") classifyName: String,
+        @Field("goodsOrGift") goodsOrGift: Int,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<String>
+
+    /**
+     * 获取商品
+     * @param gasId 油站id
+     * @param goodsClassifyId 商品分类id
+     * @param page 页码
+     * @param pageSize 每页数量
+     */
+    @FormUrlEncoded
+    @POST("admin/goods/findGoodsByClassifyId")
+    suspend fun getGoods(
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId,
+        @Field("goodsClassifyId") goodsClassifyId: Int?,
+        @Field("pageCurrent") page: Int,
+        @Field("pageSize") pageSize: Int = 20
+    ): RefreshApiBean<GoodsBean>
+
+
+    /**
+     * 上传图片
+     * @param file 上传的图片
+     */
+    @Multipart
+    @POST("upload/posImage")
+    suspend fun uploadImage(@Part file: MultipartBody.Part): ApiBean<String>
+
+    /**
+     * 添加商品
+     * @param goodsPicture 商品图片
+     * @param barCode 商品条码
+     * @param goodsName 商品名称
+     * @param goodsClassifyId 商品分类ID
+     * @param sellingPrice 销售价格
+     * @param marketPrice 市场价格
+     * @param costPrice 成本价格
+     * @param goodsUnit 商品单位
+     * @param bonusPoints 赠送积分
+     * @param stock 库存
+     * @param publishOrNot 是否发布
+     * @param mallRelease 商城发布
+     * @param recommend 是否推荐
+     * @param hotOrNot 是否热门
+     * @param goodsDescribe 商品描述
+     * @param gasId 油站ID
+     * @param goodsOrGift 商品或礼品
+     */
+    @FormUrlEncoded
+    @POST("admin/goods/addGoods")
+    suspend fun addGoods(
+        @Field("goodsPicture") goodsPicture: String,
+        @Field("barCode") barCode: String?,
+        @Field("goodsName") goodsName: String?,
+        @Field("goodsClassifyId") goodsClassifyId: Int?,
+        @Field("sellingPrice") sellingPrice: Double?,
+        @Field("marketPrice") marketPrice: Double?,
+        @Field("costPrice") costPrice: Double?,
+        @Field("goodsUnit") goodsUnit: String?,
+        @Field("bonusPoints") bonusPoints: Int?,
+        @Field("stock") stock: Int?,
+        @Field("publishOrNot") publishOrNot: Int?,
+        @Field("mallRelease") mallRelease: Int?,
+        @Field("recommend") recommend: Int?,
+        @Field("hotOrNot") hotOrNot: Int?,
+        @Field("goodsDescribe") goodsDescribe: String?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId,
+        @Field("goodsOrGift") goodsOrGift: Int
+    ): ApiBean<String>
+
+    /**
+     * 修改商品
+     * @param id 商品id
+     * @param goodsPicture 商品图片
+     * @param barCode 商品条码
+     * @param goodsName 商品名称
+     * @param goodsClassifyId 商品分类id
+     * @param sellingPrice 销售价格
+     * @param marketPrice 市场价格
+     * @param costPrice 成本价格
+     * @param goodsUnit 商品单位
+     * @param bonusPoints 赠送积分
+     * @param stock 库存
+     * @param publishOrNot 是否发布
+     * @param mallRelease 商城发布
+     * @param recommend 是否推荐
+     * @param hotOrNot 是否热门
+     * @param goodsDescribe 商品描述
+     * @param gasId 油站ID
+     * @param goodsOrGift 商品或礼品
+     */
+    @FormUrlEncoded
+    @POST("admin/goods/updateGoods")
+    suspend fun updateGoods(
+        @Field("id") id: Int?,
+        @Field("goodsPicture") goodsPicture: String?,
+        @Field("barCode") barCode: String?,
+        @Field("goodsName") goodsName: String?,
+        @Field("goodsClassifyId") goodsClassifyId: Int?,
+        @Field("sellingPrice") sellingPrice: Double?,
+        @Field("marketPrice") marketPrice: Double?,
+        @Field("costPrice") costPrice: Double?,
+        @Field("goodsUnit") goodsUnit: String?,
+        @Field("bonusPoints") bonusPoints: Int?,
+        @Field("stock") stock: Int?,
+        @Field("publishOrNot") publishOrNot: Int?,
+        @Field("mallRelease") mallRelease: Int?,
+        @Field("recommend") recommend: Int?,
+        @Field("hotOrNot") hotOrNot: Int?,
+        @Field("goodsDescribe") goodsDescribe: String?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId,
+        @Field("goodsOrGift") goodsOrGift: Int
+    ): ApiBean<String>
+
+    /**
+     * 获取积分商品列表
+     * @param gasId 油站id
+     */
+    @FormUrlEncoded
+    @POST("admin/goods/queryGoodsVo")
+    suspend fun getGoodsAndGift(@Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId): ApiBean<ShopBean>
+
+    /**
+     * 商品礼品生成订单
+     * @param consumptionType 消费类型
+     * @param memberId 会员id
+     * @param pickingMethod 取货方式
+     * @param posUserId 操作员id
+     * @param gasId 油站id
+     * @param goodsOrGift 商品or礼品
+     * @param consumptionMoneyIntegral 金额or积分
+     * @param goodsMap 商品礼品id，数量
+     */
+    @FormUrlEncoded
+    @POST("admin/integralExchange/findGoodsOrderNo")
+    suspend fun getGoodsOrderNo(
+        @Field("consumptionType") consumptionType: String,
+        @Field("memberId") memberId: Int?,
+        @Field("pickingMethod") pickingMethod: String = "门店自取",
+        @Field("posUserId") posUserId: Int? = CommonConstant.getUserInfo()?.id,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId,
+        @Field("goodsOrGift") goodsOrGift: Int,
+        @Field("consumptionMoneyIntegral") consumptionMoneyIntegral: String,
+        @Field("goods1") goodsMap: String
+    ): ApiBean<String>
+
+    /**
+     * 积分支付
+     * @param goodsOrderNo 订单号
+     * @param goodsMap 商品礼品id，数量
+     */
+    @FormUrlEncoded
+    @POST("admin/integralExchange/redemptionOfPoints")
+    suspend fun giftPayment(
+        @Field("goodsOrderNo") goodsOrderNo: String,
+        @Field("goods1") goodsMap: String
+    ): ApiBean<String>
+
+    /**
+     * 商品收银通用钱包支付
+     * @param goodsOrderNo 订单号
+     * @param goodsMap 商品礼品id，数量
+     */
+    @FormUrlEncoded
+    @POST("admin/integralExchange/universalWallet")
+    suspend fun goodsCurrencyPayment(
+        @Field("goodsOrderNo") goodsOrderNo: String,
+        @Field("goods1") goodsMap: String
+    ): ApiBean<String>
+
+    /**
+     * 商品收银扫码支付
+     * @param authCode 微信付款码
+     * @param tradeNo 订单号
+     * @param totalFee 总金额
+     * @param state 类型 3 商品收银
+     * @param goodsMap 商品礼品id，数量
+     */
+    @FormUrlEncoded
+    @POST("pos/tradePay/pay")
+    suspend fun goodsPay(
+        @Field("authCode") authCode: String,
+        @Field("tradeNo") tradeNo: String,
+        @Field("totalFee") totalFee: Double,
+        @Field("state") state: Int = 3,
+        @Field("goods1") goodsMap: String,
+    ): ApiBean<PaySuccessBean>
+
+    /**
+     * 商品收银现金支付
+     * @param goodsOrderNo 订单号
+     * @param goodsMap 商品礼品id，数量
+     */
+    @FormUrlEncoded
+    @POST("admin/integralExchange/cashRegister")
+    suspend fun goodsCashPayment(
+        @Field("goodsOrderNo") goodsOrderNo: String,
+        @Field("goods1") goodsMap: String
+    ): ApiBean<String>
 }
