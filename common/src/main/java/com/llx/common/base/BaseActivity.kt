@@ -23,6 +23,7 @@ abstract class BaseActivity<DB : ViewDataBinding>(@LayoutRes val layoutRes: Int)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutRes)
+
         binding.lifecycleOwner = this
         statusBarOnly {
             // 布局是否侵入状态栏（true 不侵入，false 侵入）

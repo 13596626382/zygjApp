@@ -12,6 +12,7 @@ import com.tx.zygj.bean.GoodsBean
 import com.tx.zygj.bean.MemberManageBean
 import com.tx.zygj.databinding.ActivityGoodsCashierBinding
 import com.tx.zygj.ui.scan.ScanCodeActivity
+import com.tx.zygj.util.SunmiPrintHelper
 
 /**
  * 购买商品
@@ -82,6 +83,7 @@ class GoodsCashierActivity :
             popUpView.dismiss()
             if (it) {
                 CommonConstant.isPaySuccess = true
+                SunmiPrintHelper.sendGoodsRawData(goodsBean, true)
                 showConfirmDialog(content = "支付成功", block = {
                     onBackActivity()
                 }, isHideCancel = true)

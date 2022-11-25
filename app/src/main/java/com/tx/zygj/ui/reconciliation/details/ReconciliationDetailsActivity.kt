@@ -45,6 +45,6 @@ class ReconciliationDetailsActivity :
         if (value == "") {
             value = "0"
         }
-        binding.oilsRise.text = stringBuild(value.division(actual.toDouble()), "L")
+        binding.oilsRise.text = stringBuild(value.toDouble().division(actual.toDouble()), "L")
     }
 }

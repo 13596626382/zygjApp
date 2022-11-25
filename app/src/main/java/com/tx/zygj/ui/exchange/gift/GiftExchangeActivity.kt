@@ -9,6 +9,7 @@ import com.tx.zygj.R
 import com.tx.zygj.bean.GoodsBean
 import com.tx.zygj.bean.MemberManageBean
 import com.tx.zygj.databinding.ActivityGiftExchangeBinding
+import com.tx.zygj.util.SunmiPrintHelper
 
 /**
  * 积分兑换
@@ -51,6 +52,7 @@ class GiftExchangeActivity :
             popUpView.dismiss()
             if (it) {
                 CommonConstant.isPaySuccess = true
+                SunmiPrintHelper.sendGoodsRawData(goodsBean, false)
                 showConfirmDialog(content = "兑换成功", block = {
                     onBackActivity()
                 }, isHideCancel = true)

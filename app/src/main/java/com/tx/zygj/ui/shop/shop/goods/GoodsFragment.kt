@@ -92,7 +92,7 @@ class GoodsFragment :
                     binding.shopCount.visibility = View.GONE
                 }
                 binding.shopCount.text = shopQuantity.toString()
-                binding.price.text = price.toString()
+                binding.price.text = price.decimal().toString()
                 mGoodsAdapter.notifyDataSetChanged()
             }
             mContext.showPopupView(binding.linearLayout6, shopCartPopupView)

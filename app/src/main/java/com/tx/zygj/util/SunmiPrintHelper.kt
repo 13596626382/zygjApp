@@ -8,6 +8,7 @@ import com.sunmi.peripheral.printer.InnerPrinterCallback
 import com.sunmi.peripheral.printer.InnerPrinterManager
 import com.sunmi.peripheral.printer.InnerResultCallback
 import com.sunmi.peripheral.printer.SunmiPrinterService
+import com.tx.zygj.bean.GoodsBean
 import com.tx.zygj.bean.HandoverBean
 import com.tx.zygj.bean.MemberManageBean
 import com.tx.zygj.bean.PaySuccessBean
@@ -357,7 +358,7 @@ object SunmiPrintHelper {
             }
             setting("----------------------------------")
 
-            setting("操作员：${paySuccessBean?.gasMan}")
+            setting("加油员：${paySuccessBean?.gasMan}")
             setting(
                 "类型：${
                     when (paySuccessBean?.cardType) {
@@ -468,7 +469,7 @@ object SunmiPrintHelper {
             }
             setting("----------------------------------")
 
-            setting("操作员：${paySuccessBean?.gasMan}")
+            setting("加油员：${paySuccessBean?.gasMan}")
             if (paySuccessBean?.gunNumber != null) {
                 setting("枪号：${paySuccessBean.gunNumber} 号枪")
             }
@@ -544,7 +545,6 @@ object SunmiPrintHelper {
             }
         }
     }
-
 
     //交班小票
     fun sendShiftHandoverRawData(handoverBean: HandoverBean?) {
@@ -686,6 +686,34 @@ object SunmiPrintHelper {
             }
             lineWrap(3, null)
         }
+    }
+
+    fun sendGoodsRawData(goodsBean: MutableList<GoodsBean>, goodsOrGift: Boolean) {
+        sunmiPrinterService?.apply {
+            setting("${CommonConstant.getUserInfo()?.gasName}", 1, 30f)
+
+            setting("----------------------------------")
+
+            goodsBean.forEach {
+                setting("商品名：${it.goodsName}")
+                setting("数  量：${it.quantity}")
+
+                if (goodsOrGift) {
+                    setting("单  价：${it.sellingPrice}")
+                    setting("总  价：${it.sellingPrice!! * it.quantity}")
+                } else {
+                    setting("单  价：${it.bonusPoints}")
+                    setting("总  价：${it.bonusPoints!! * it.quantity}")
+                }
+            }
+            setting("----------------------------------")
+
+            setting("地址：${CommonConstant.getUserInfo()?.address}")
+
+            setting("电话：${CommonConstant.getUserInfo()?.gasPhone}")
+
+        }
+
     }
 }
 

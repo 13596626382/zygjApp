@@ -199,7 +199,7 @@ class RefuelingCashierActivity :
             value = "0"
         }
         binding.oilsRise.text =
-            stringBuild("约", value.division(oilModelBean?.price!!), "L")
+            stringBuild("约", value.toDouble().division(oilModelBean?.price!!), "L")
     }
 //
 //    //检查是否选择会员

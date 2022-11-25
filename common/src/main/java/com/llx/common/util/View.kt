@@ -16,6 +16,7 @@ fun View.setOnBackActivity(activity: AppCompatActivity) {
         activity.onBackActivity()
     }
 }
+
 //禁止连续点击
 inline fun View.setOnSingleClickListener(crossinline block: (View) -> Unit) {
     var lastClickTime = 0L
@@ -27,6 +28,7 @@ inline fun View.setOnSingleClickListener(crossinline block: (View) -> Unit) {
         block.invoke(it)
     }
 }
+
 //只返回输入结果
 inline fun EditText.addAfterTextChanged(crossinline block: String.() -> Unit) {
     addTextChangedListener(object : TextWatcher {
@@ -43,7 +45,6 @@ inline fun EditText.addAfterTextChanged(crossinline block: String.() -> Unit) {
 
     })
 }
-
 
 fun TextView.textString() = text.toString().trim()
 

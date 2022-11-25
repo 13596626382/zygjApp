@@ -57,6 +57,7 @@ class RefreshView<T>(context: Context, attrs: AttributeSet?) :
     }
 
 
+
     fun setLifecycleOwner(lifecycleOwner: LifecycleOwner) {
         mLifecycleOwner = lifecycleOwner
 

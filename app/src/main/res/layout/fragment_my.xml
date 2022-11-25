@@ -45,6 +45,7 @@
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7">
 
@@ -59,19 +60,12 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="20dp">
 
-
-                    <androidx.cardview.widget.CardView
+                    <ImageView
+                        android:id="@+id/imageView2"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:layout_marginStart="33dp"
-                        app:cardCornerRadius="5dp">
-
-                        <ImageView
-                            android:id="@+id/imageView2"
-                            setImage="@{userBean.avatarUrl}"
-                            android:layout_width="64dp"
-                            android:layout_height="64dp" />
-                    </androidx.cardview.widget.CardView>
+                        android:src="@mipmap/icon_launcher" />
 
                     <TextView
                         android:id="@+id/textView8"
