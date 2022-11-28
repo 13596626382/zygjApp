@@ -37,7 +37,33 @@ class GiftFragment :
             }
         }
         binding.goodsRecyclerView.bind(mGoodsAdapter) {
-
+            setEmptyView(R.layout.view_empty)
+            onChangeQuantityListener = { addOrReduce, bean ->
+                val integral = binding.integral.textString().toInt()
+                if (addOrReduce) {
+                    shopQuantity += 1
+                    binding.integral.text = (integral + bean.bonusPoints!!).toString()
+                    if (goodsBean.contains(bean)) {
+                        goodsBean[goodsBean.indexOf(bean)].quantity = bean.quantity
+                    } else {
+                        goodsBean.add(bean)
+                    }
+                } else {
+                    shopQuantity -= 1
+                    binding.integral.text = (integral - bean.bonusPoints!!).toString()
+                    if (bean.quantity == 0) {
+                        goodsBean.remove(bean)
+                    } else {
+                        goodsBean[goodsBean.indexOf(bean)].quantity = bean.quantity
+                    }
+                }
+                if (shopQuantity < 1) {
+                    binding.shopCount.visibility = View.GONE
+                } else {
+                    binding.shopCount.visibility = View.VISIBLE
+                    binding.shopCount.text = shopQuantity.toString()
+                }
+            }
         }
         model.apply {
             getGift()
@@ -46,37 +72,9 @@ class GiftFragment :
                 mGoodsAdapter.setList(it[0].goodsList)
             }
         }
-        mGoodsAdapter.setEmptyView(R.layout.view_empty)
 
-        mGoodsAdapter.onChangeQuantityListener = { addOrReduce, bean ->
-            val integral = binding.integral.textString().toInt()
-            if (addOrReduce) {
-                shopQuantity += 1
-                binding.integral.text = (integral + bean.bonusPoints!!).toString()
-                if (goodsBean.contains(bean)) {
-                    goodsBean[goodsBean.indexOf(bean)].quantity = bean.quantity
-                } else {
-                    goodsBean.add(bean)
-                }
-            } else {
-                shopQuantity -= 1
-                binding.integral.text = (integral - bean.bonusPoints!!).toString()
-                if (bean.quantity == 0) {
-                    goodsBean.remove(bean)
-                } else {
-                    goodsBean[goodsBean.indexOf(bean)].quantity = bean.quantity
-                }
-            }
-            if (shopQuantity < 1) {
-                binding.shopCount.visibility = View.GONE
-            } else {
-                binding.shopCount.visibility = View.VISIBLE
-                binding.shopCount.text = shopQuantity.toString()
-            }
-
-        }
-        binding.shop.setOnClickListener {
-            if (goodsBean.isEmpty()) return@setOnClickListener
+        binding.shop.setOnSingleClickListener {
+            if (goodsBean.isEmpty()) return@setOnSingleClickListener
             shopCartPopupView = ShopCartPopupView(mContext, goodsBean)
             shopCartPopupView.onChangeQuantityListener = {
                 goodsBean = it

@@ -8,13 +8,27 @@
             type="com.tx.zygj.bean.GoodsClassifyBean" />
     </data>
 
-    <TextView
-        android:id="@+id/shop_sort"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:background="@color/white"
-        android:gravity="center"
-        android:text="@{goodsClassifyBean.classifyName}"
-        android:textColor="@color/color_939393"
-        android:textSize="12sp" />
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="5dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/change_fc664a_f38b26_4" />
+
+        <TextView
+            android:id="@+id/shop_classify"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@{goodsClassifyBean.classifyName}"
+            android:textColor="@color/color_939393"
+            android:textSize="12sp" />
+    </LinearLayout>
 </layout>

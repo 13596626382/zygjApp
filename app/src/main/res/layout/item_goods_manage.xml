@@ -16,13 +16,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/fillet_ffffff_4">
 
         <ImageView
             android:id="@+id/imageView6"
             setImage="@{goodsBean.goodsPicture}"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -54,19 +59,52 @@
             android:id="@+id/textView28"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{goodsBean.goodsOrGift == 1 ? `￥` + goodsBean.sellingPrice : goodsBean.bonusPoints + ` 积分`}"
+            android:text="@{goodsBean.goodsOrGift == 1 ? `￥` + goodsBean.sellingPrice : goodsBean.bonusPoints + `积分`}"
             android:textColor="@color/color_F38B26"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintStart_toStartOf="@+id/textView66" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/icon_line"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="5dp"
+            android:text="@{`库存：` + goodsBean.stock}"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/add_quantity"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/reduce_quantity"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="7dp"
+            android:src="@drawable/icon_reduce"
+            android:visibility="invisible"
+
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+            app:layout_constraintEnd_toStartOf="@+id/quantity" />
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="7dp"
+            android:textColor="@color/color_3D4255"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/reduce_quantity"
+            app:layout_constraintEnd_toStartOf="@+id/add_quantity" />
+
+        <ImageView
+            android:id="@+id/add_quantity"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/icon_quantiy"
+            app:layout_constraintBottom_toBottomOf="@+id/reduce_quantity"
+            app:layout_constraintEnd_toEndOf="@+id/textView30" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

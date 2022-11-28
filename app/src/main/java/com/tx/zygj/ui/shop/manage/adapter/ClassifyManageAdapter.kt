@@ -1,5 +1,6 @@
 package com.tx.zygj.ui.shop.manage.adapter
 
+import android.view.View
 import com.llx.common.base.BaseAdapter
 import com.llx.common.util.getCompatColor
 import com.tx.zygj.BR
@@ -18,15 +19,17 @@ class ClassifyManageAdapter : BaseAdapter<GoodsClassifyBean, ItemClassifyManageB
             data[position].isCheck = true
             isFirst = true
         }
-        binding.shopSort.setBackgroundColor(
+        binding.root.setBackgroundColor(
             if (item.isCheck) getCompatColor(R.color.color_F5F5F6) else getCompatColor(
                 R.color.white
             )
         )
-        binding.shopSort.setTextColor(
+        binding.shopClassify.setTextColor(
             if (item.isCheck) getCompatColor(R.color.color_F38B26) else getCompatColor(
                 R.color.color_939393
             )
         )
+
+        binding.view.visibility = if (item.isCheck) View.VISIBLE else View.INVISIBLE
     }
 }

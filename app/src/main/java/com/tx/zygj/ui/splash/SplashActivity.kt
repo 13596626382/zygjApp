@@ -49,7 +49,7 @@ class SplashActivity : BaseActivity<ActivityLaunchBinding>(R.layout.activity_lau
                     startActivity<LoginActivity>()
                 }
 
-                onBackActivity()
+                finish()
 
             } else {
                 toast("无网络连接请检查网络连接状态")

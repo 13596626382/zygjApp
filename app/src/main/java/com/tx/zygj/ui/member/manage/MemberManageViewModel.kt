@@ -3,7 +3,6 @@ package com.tx.zygj.ui.member.manage
 import androidx.lifecycle.MutableLiveData
 import com.llx.common.base.BaseViewModel
 import com.tx.zygj.bean.MemberManageBean
-import kotlinx.coroutines.flow.flow
 
 class MemberManageViewModel : BaseViewModel() {
     private val repository by lazy { MemberManageRepository() }
@@ -15,8 +14,4 @@ class MemberManageViewModel : BaseViewModel() {
         }
     }
 
-
-    val foa = flow {
-        emit(1)
-    }
 }

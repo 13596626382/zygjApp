@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.llx.common.util.bind
+import com.llx.common.util.getCompatDrawable
 import com.llx.common.util.setOnSingleClickListener
 import com.lxj.xpopup.impl.PartShadowPopupView
 import com.tx.zygj.R
@@ -16,19 +17,41 @@ class ShopCartPopupView(context: Context, private val goodsBean: MutableList<Goo
     lateinit var onChangeQuantityListener: (MutableList<GoodsBean>) -> Unit
     override fun getImplLayoutId() = R.layout.pop_shop
     override fun onCreate() {
-
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        val clearView: View = findViewById(R.id.clear)
-        recyclerView.bind(mAdapter) {
+        findViewById<RecyclerView>(R.id.recyclerView).bind(mAdapter) {
             setList(goodsBean)
-            onChangeQuantityListener = {
-                if (data.isEmpty()) dismiss()
-                this@ShopCartPopupView.onChangeQuantityListener.invoke(it)
+
+            onBind {
+                dataBinding!!.addQuantity.setOnSingleClickListener {
+                    data[layoutPosition].quantity++
+                    dataBinding!!.quantity.visibility = View.VISIBLE
+                    dataBinding!!.reduceQuantity.visibility = View.VISIBLE
+                    dataBinding!!.quantity.text = data[position].quantity.toString()
+                    if (data[layoutPosition].stock == data[position].quantity) {
+                        dataBinding!!.addQuantity.isEnabled = false
+                        dataBinding!!.addQuantity.setImageDrawable(getCompatDrawable(R.drawable.icon_quantiy_no))
+                    }
+                    onChangeQuantityListener.invoke(data)
+                }
+                dataBinding!!.reduceQuantity.setOnSingleClickListener {
+                    data[layoutPosition].quantity--
+                    dataBinding!!.quantity.text = data[layoutPosition].quantity.toString()
+                    if (!dataBinding!!.addQuantity.isEnabled) {
+                        dataBinding!!.addQuantity.isEnabled = true
+                        dataBinding!!.addQuantity.setImageDrawable(getCompatDrawable(R.drawable.icon_quantiy))
+                    }
+                    if (data[layoutPosition].quantity == 0) {
+                        removeAt(layoutPosition)
+                    }
+                    onChangeQuantityListener.invoke(data)
+                    if (data.isEmpty()) {
+                        dismiss()
+                    }
+                }
             }
         }
-        clearView.setOnSingleClickListener {
+        findViewById<View>(R.id.clear).setOnSingleClickListener {
             goodsBean.forEach { it.quantity = 0 }
-            this@ShopCartPopupView.onChangeQuantityListener.invoke(goodsBean)
+            onChangeQuantityListener.invoke(goodsBean)
             goodsBean.clear()
             dismiss()
         }

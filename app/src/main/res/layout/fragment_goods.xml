@@ -18,21 +18,14 @@
             android:background="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:background="@color/color_F5F5F6"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
-            app:layout_constraintEnd_toEndOf="@+id/classify_recyclerView"
-            app:layout_constraintTop_toTopOf="@+id/goods_recyclerView" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/goods_recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/white"
+            android:background="@color/color_F5F5F6"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/classify_recyclerView"

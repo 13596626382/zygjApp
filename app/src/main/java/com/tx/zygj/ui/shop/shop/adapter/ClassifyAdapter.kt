@@ -1,5 +1,6 @@
 package com.tx.zygj.ui.shop.shop.adapter
 
+import android.view.View
 import com.llx.common.base.BaseAdapter
 import com.llx.common.util.getCompatColor
 import com.tx.zygj.BR
@@ -13,12 +14,16 @@ class ClassifyAdapter : BaseAdapter<ShopBean.ShopClassifyBean, ItemClassifyBindi
     BR.goodsClassifyBean
 ) {
     var isFirst = false
-    override fun convert1(binding: ItemClassifyBinding, item: ShopBean.ShopClassifyBean, position: Int) {
+    override fun convert1(
+        binding: ItemClassifyBinding,
+        item: ShopBean.ShopClassifyBean,
+        position: Int
+    ) {
         if (!isFirst && position == 0) {
             data[position].isCheck = true
             isFirst = true
         }
-        binding.shopClassify.setBackgroundColor(
+        binding.root.setBackgroundColor(
             if (item.isCheck) getCompatColor(R.color.color_F5F5F6) else getCompatColor(
                 R.color.white
             )
@@ -28,5 +33,7 @@ class ClassifyAdapter : BaseAdapter<ShopBean.ShopClassifyBean, ItemClassifyBindi
                 R.color.color_939393
             )
         )
+
+        binding.view.visibility = if (item.isCheck) View.VISIBLE else View.INVISIBLE
     }
 }

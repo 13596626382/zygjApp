@@ -44,12 +44,10 @@ class MemberManageActivity :
             mAdapter.setList(mDateList)
         }
         mLayoutManager = LinearLayoutManager(mContext)
+
         binding.recyclerView.bind(mAdapter) {
-//            setOnItemClickListener { _, _, position ->
-//                startActivity<MemberInformationActivity>(CommonConstant.MEMBER_ID to data[position].id)
-//            }
             onBind {
-                dataBinding!!.imageView9.setOnSingleClickListener {
+                dataBinding!!.imageView9.setOnSingleClickListener { _ ->
                     startActivity<MemberInformationActivity>(CommonConstant.MEMBER_ID to data[layoutPosition].id)
                 }
             }

@@ -1,10 +1,12 @@
 package com.tx.zygj.ui.shop.manage.goods
 
+import androidx.core.view.updateLayoutParams
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.llx.common.CommonConstant
 import com.llx.common.base.BaseFragment
 import com.llx.common.util.bind
+import com.llx.common.util.getCompatDrawable
 import com.llx.common.util.withArguments
 import com.lxj.xpopup.XPopup
 import com.tx.zygj.R
@@ -51,6 +53,8 @@ class GoodsManageFragment :
             binding.sortRecyclerView,
             false
         )
+        viewAddBinding1.root.background = getCompatDrawable(R.drawable.fillet_ffffff_4)
+
         mClassifyManageAdapter.addFooterView(viewAddBinding.root)
         mGoodsManageAdapter.addFooterView(viewAddBinding1.root)
         viewAddBinding.root.setOnClickListener {

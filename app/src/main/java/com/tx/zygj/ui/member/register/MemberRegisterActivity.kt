@@ -27,6 +27,7 @@ class MemberRegisterActivity :
             binding.memberBean = intent
             memberManageBean = intent
             binding.cardLayout.visibility = View.GONE
+            binding.memberView.visibility = View.GONE
         } else {
             memberManageBean = MemberManageBean()
         }
