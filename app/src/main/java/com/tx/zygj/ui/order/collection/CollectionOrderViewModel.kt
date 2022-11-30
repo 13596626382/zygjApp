@@ -72,7 +72,7 @@ class CollectionOrderViewModel : BaseViewModel() {
             if (data.code == 0) {
                 paySuccessBean.value = data.getData()
             } else {
-                toast(data.code)
+                toast(data.msg)
             }
             requestResult.value = data.code == 0
         }
@@ -92,7 +92,7 @@ class CollectionOrderViewModel : BaseViewModel() {
             if (data.code == 0) {
                 paySuccessBean.value = data.getData()
             } else {
-                toast(data.code)
+                toast(data.msg)
             }
             requestResult.value = data.code == 0
         }

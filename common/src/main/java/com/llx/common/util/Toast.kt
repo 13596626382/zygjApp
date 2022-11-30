@@ -1,51 +1,38 @@
 package com.llx.common.util
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.view.WindowManager
-import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import com.app.toast.ToastX
+import com.app.toast.snackbar.SnackBarX
+import com.llx.common.R
 
-fun Fragment.toast(message: CharSequence?): Toast =
-    requireActivity().toast(message)
-
-fun Fragment.toast(@StringRes message: Int): Toast =
-    requireActivity().toast(message)
-
-fun toast(message: CharSequence?): Toast =
+fun toast(message: String) =
     topActivity.toast(message)
 
-fun toast(@StringRes message: Int): Toast =
-    topActivity.toast(message)
+fun Fragment.toast(message: String) =
+    requireActivity().toast(message)
 
-fun Context.toast(message: CharSequence?): Toast =
-    Toast.makeText(this, message, Toast.LENGTH_SHORT).fixBadTokenException().apply { show() }
+fun Context.toast(message: String) {
+    ToastX.with(this as Activity).fixBadTokenException().apply {
+        text(message)
+        backgroundColor(R.color.color_5F5F5F)
+        offset(20.dp.toInt())
+        show()
+    }
+}
 
-fun Context.toast(@StringRes message: Int): Toast =
-    Toast.makeText(this, message, Toast.LENGTH_SHORT).fixBadTokenException().apply { show() }
-
-fun Fragment.longToast(message: CharSequence?): Toast =
-    requireActivity().longToast(message)
-
-fun Fragment.longToast(@StringRes message: Int): Toast =
-    requireActivity().longToast(message)
-
-fun Context.longToast(message: CharSequence?): Toast =
-    Toast.makeText(this, message, Toast.LENGTH_LONG).fixBadTokenException().apply { show() }
-
-fun Context.longToast(@StringRes message: Int): Toast =
-    Toast.makeText(this, message, Toast.LENGTH_LONG).fixBadTokenException().apply { show() }
-
-fun Toast.fixBadTokenException(): Toast = apply {
+fun SnackBarX.fixBadTokenException(): SnackBarX = apply {
     if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
         try {
             @SuppressLint("DiscouragedPrivateApi")
-            val tnField = Toast::class.java.getDeclaredField("mTN")
+            val tnField = SnackBarX::class.java.getDeclaredField("mTN")
             tnField.isAccessible = true
             val tn = tnField.get(this)
 

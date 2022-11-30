@@ -5,15 +5,14 @@ import com.llx.common.base.BaseViewModel
 import com.llx.common.util.toast
 import com.tx.zygj.bean.OilBean
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
 class OilSettingViewModel : BaseViewModel() {
     private val repository by lazy { OilSettingRepository() }
     val oilBean = MutableLiveData<ArrayList<OilBean>>()
-    fun getOleice(id: Int?) {
+    fun getOleice() {
         launch {
-            val data = repository.getOleice(id)
+            val data = repository.getOleice()
             oilBean.value = data.getData()
         }
     }

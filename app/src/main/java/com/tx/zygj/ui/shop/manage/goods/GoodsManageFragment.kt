@@ -1,6 +1,5 @@
 package com.tx.zygj.ui.shop.manage.goods
 
-import androidx.core.view.updateLayoutParams
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.llx.common.CommonConstant
@@ -12,6 +11,7 @@ import com.lxj.xpopup.XPopup
 import com.tx.zygj.R
 import com.tx.zygj.bean.GoodsClassifyBean
 import com.tx.zygj.databinding.FragmentGoodsManageBinding
+import com.tx.zygj.databinding.ViewAdd1Binding
 import com.tx.zygj.databinding.ViewAddBinding
 import com.tx.zygj.dialog.shop.ManageShopDialogFragment
 import com.tx.zygj.ui.shop.manage.adapter.ClassifyManageAdapter
@@ -47,9 +47,9 @@ class GoodsManageFragment :
             binding.sortRecyclerView,
             false
         )
-        val viewAddBinding1 = DataBindingUtil.inflate<ViewAddBinding>(
+        val viewAddBinding1 = DataBindingUtil.inflate<ViewAdd1Binding>(
             layoutInflater,
-            R.layout.view_add,
+            R.layout.view_add_1,
             binding.sortRecyclerView,
             false
         )

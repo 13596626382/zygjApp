@@ -22,7 +22,7 @@ class OilSettingActivity : BaseActivity<ActivityOilSettingBinding>(R.layout.acti
     override fun initData() {
         binding.titleBar.setOnBack(this)
         binding.userInfoBean = CommonConstant.getUserInfo()
-        model.getOleice(CommonConstant.getUserInfo()?.gasId)
+        model.getOleice()
         binding.recyclerView.bind(mAdapter) {
         }
         model.oilBean.observe(this) {

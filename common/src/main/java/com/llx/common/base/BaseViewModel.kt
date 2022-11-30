@@ -3,10 +3,12 @@ package com.llx.common.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.JsonSyntaxException
 import com.llx.common.util.isNetworkAvailable
 import com.llx.common.util.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -35,6 +37,8 @@ abstract class BaseViewModel : ViewModel() {
                     is SocketTimeoutException -> toast("网络连接超时")
                     is ConnectException -> toast("服务器异常")
                     is UnknownHostException -> toast("网络异常，请检查网络是否通畅")
+                    is JsonSyntaxException -> toast("json解析出错了")
+                    is HttpException -> toast("服务器崩溃了(˵¯͒〰¯͒˵)")
                 }
                 requestResult.value = false
                 error?.invoke(e)

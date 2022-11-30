@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.llx.common.CommonConstant
 import com.llx.common.base.BaseActivity
 import com.llx.common.util.bind
-import com.llx.common.util.setOnSingleClickListener
 import com.llx.common.util.startActivity
 import com.tx.zygj.R
 import com.tx.zygj.bean.MemberManageBean
@@ -46,10 +45,8 @@ class MemberManageActivity :
         mLayoutManager = LinearLayoutManager(mContext)
 
         binding.recyclerView.bind(mAdapter) {
-            onBind {
-                dataBinding!!.imageView9.setOnSingleClickListener { _ ->
-                    startActivity<MemberInformationActivity>(CommonConstant.MEMBER_ID to data[layoutPosition].id)
-                }
+            setOnItemClickListener { _, _, position ->
+                startActivity<MemberInformationActivity>(CommonConstant.MEMBER_ID to data[position].id)
             }
             setEmptyView(layoutInflater.inflate(R.layout.view_empty, null, false))
         }

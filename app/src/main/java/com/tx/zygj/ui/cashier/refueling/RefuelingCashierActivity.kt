@@ -170,7 +170,7 @@ class RefuelingCashierActivity :
         checkOilsType()
         model.apply {
             getOleice()
-            getOiler(CommonConstant.getUserInfo()?.gasId)
+            getOiler()
             oilBean.observe(this@RefuelingCashierActivity) {
                 oilListBean = it
                 mTypeAdapter.setList(it)

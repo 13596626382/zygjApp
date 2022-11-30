@@ -38,8 +38,7 @@ class CollectionOrderRepository : BaseRepository() {
         actual: Double,
         integral: Int,
         gasmanid: Int?,
-    ) =
-        retrofit.cardPayment(orderNo, memberPhone, actual, integral, gasmanid)
+    ) = retrofit.cardPayment(orderNo, memberPhone, actual, integral, gasmanid)
 
     suspend fun oidCardPayment(
         orderNo: String,

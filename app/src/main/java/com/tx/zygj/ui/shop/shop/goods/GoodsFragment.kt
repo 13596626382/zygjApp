@@ -112,6 +112,7 @@ class GoodsFragment :
                 "memberBean" to memberManageBean
             )
         }
+
     }
 
     override fun update() {

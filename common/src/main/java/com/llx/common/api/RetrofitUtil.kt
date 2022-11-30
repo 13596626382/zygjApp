@@ -1,5 +1,6 @@
 package com.llx.common.api
 
+import com.llx.common.CommonConstant
 import com.llx.common.util.logE
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,8 +23,8 @@ object RetrofitUtil {
         .build()
 
     private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.110.10:80/")
-//        .baseUrl("https://zygj.cczxyl.com/")
+//        .baseUrl("http://192.168.110.10:80/")
+        .baseUrl("https://zygj.cczxyl.com/")
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

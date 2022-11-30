@@ -21,14 +21,15 @@ interface Api {
     @FormUrlEncoded
     @POST("pos/user/login")
     suspend fun login(
-        @Field("phone") phone: String, @Field("password") passWord: String
+        @Field("phone") phone: String,
+        @Field("password") passWord: String
     ): ApiBean<UserInfoBean>
 
     /**
      * 获取今日业绩
      */
     @GET("pos/user/statistics")
-    suspend fun getStatistics(): ApiBean<StatisticsBean>
+    suspend fun getStatistics(@Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId): ApiBean<StatisticsBean>
 
     /**
      * 修改个人信息
@@ -46,6 +47,7 @@ interface Api {
         @Field("name") name: String?,
         @Field("phone") phone: String?,
         @Field("workNumber") workNumber: String?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<String>
 
     /**
@@ -62,6 +64,7 @@ interface Api {
         @Field("oldPassword") passWord: String,
         @Field("newPassword") newPassWord: String,
         @Field("newPassword2") confirmPassword: String,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<String>
 
 
@@ -69,7 +72,9 @@ interface Api {
      * 会员管理
      */
     @GET("pos/member/getMember")
-    suspend fun getMember(): ApiBean<ArrayList<MemberManageBean>>
+    suspend fun getMember(
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<ArrayList<MemberManageBean>>
 
     /**
      * 获取会员信息
@@ -77,7 +82,10 @@ interface Api {
      */
     @FormUrlEncoded
     @POST("pos/member/toUpdateMember")
-    suspend fun getMemBerMsg(@Field("id") id: Int?): ApiBean<MemberManageBean>
+    suspend fun getMemBerMsg(
+        @Field("id") id: Int?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<MemberManageBean>
 
     /**
      * 查找会员
@@ -86,7 +94,9 @@ interface Api {
     @FormUrlEncoded
     @POST("pos/member/likeMembers")
     suspend fun likeMembers(
-        @Field("by") like: String, @Field("pageCurrent") page: Int
+        @Field("by") like: String,
+        @Field("pageCurrent") page: Int,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): RefreshApiBean<MemberManageBean>
 
     /**
@@ -119,6 +129,7 @@ interface Api {
         @Field("recommend") recommend: String?,
         @Field("applicant") applicant: String,
         @Field("place") place: String,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<String>
 
 
@@ -154,6 +165,7 @@ interface Api {
         @Field("recommend") recommend: String?,
         @Field("applicant") applicant: String,
         @Field("place") place: String,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<String>
 
     /**
@@ -162,7 +174,10 @@ interface Api {
      */
     @FormUrlEncoded
     @POST("pos/car/getCarNumber")
-    suspend fun getCarNumber(@Field("phone") phone: String?): ApiBean<ArrayList<CarBrandBean>>
+    suspend fun getCarNumber(
+        @Field("phone") phone: String?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<ArrayList<CarBrandBean>>
 
     /**
      * 添加车牌
@@ -177,7 +192,8 @@ interface Api {
         @Field("carName") carName: String?,
         @Field("carNumber") carNumber: String?,
         @Field("phone") phone: String?,
-        @Field("state") state: Int?
+        @Field("state") state: Int?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<String>
 
     /**
@@ -195,7 +211,8 @@ interface Api {
         @Field("carName") carName: String?,
         @Field("carNumber") carNumber: String?,
         @Field("phone") phone: String?,
-        @Field("state") state: Int?
+        @Field("state") state: Int?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<String>
 
 
@@ -205,7 +222,10 @@ interface Api {
      */
     @FormUrlEncoded
     @POST("pos/car/deleteCarNumber")
-    suspend fun deleteCarNumber(@Field("id") id: Int?): ApiBean<String>
+    suspend fun deleteCarNumber(
+        @Field("id") id: Int?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<String>
 
 
     /**
@@ -216,7 +236,9 @@ interface Api {
     @FormUrlEncoded
     @POST("pos/order/orderList")
     suspend fun getOrderList(
-        @Field("memberPhone") memberPhone: String?, @Field("years") years: String?
+        @Field("memberPhone") memberPhone: String?,
+        @Field("years") years: String?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<ArrayList<ConsumeBean>>
 
     /**
@@ -225,7 +247,10 @@ interface Api {
      */
     @FormUrlEncoded
     @POST("pos/order/deleteOrder")
-    suspend fun deleteOrder(@Field("id") id: Int): ApiBean<String>
+    suspend fun deleteOrder(
+        @Field("id") id: Int,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<String>
 
 
     /**
@@ -235,7 +260,8 @@ interface Api {
     @FormUrlEncoded
     @POST("pos/findRecharges")
     suspend fun findRecharges(
-        @Field("memberPhone") memberPhone: String?
+        @Field("memberPhone") memberPhone: String?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<ArrayList<MemberRechargeRecordBean>>
 
 
@@ -245,7 +271,10 @@ interface Api {
      */
     @FormUrlEncoded
     @POST("pos/deleteRecharges")
-    suspend fun deleteRecharges(@Field("id") id: Int): ApiBean<String>
+    suspend fun deleteRecharges(
+        @Field("id") id: Int,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<String>
 
     /**
      * 获取油品
@@ -253,7 +282,7 @@ interface Api {
      */
     @FormUrlEncoded
     @POST("pos/oleic/getOleice")
-    suspend fun getOleice(@Field("gasId") id: Int?): ApiBean<ArrayList<OilBean>>
+    suspend fun getOleice(@Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId): ApiBean<ArrayList<OilBean>>
 
     /**
      * 获取油枪号
@@ -261,7 +290,10 @@ interface Api {
      */
     @FormUrlEncoded
     @POST("pos/oleic/getOilGun")
-    suspend fun getOilGun(@Field("id") id: Int?): ApiBean<ArrayList<OilGunBean>>
+    suspend fun getOilGun(
+        @Field("id") id: Int?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<ArrayList<OilGunBean>>
 
     /**
      * 获取加油员
@@ -269,13 +301,16 @@ interface Api {
      */
     @FormUrlEncoded
     @POST("pos/oleic/getGasMan")
-    suspend fun getOiler(@Field("gasId") gasId: Int?): ApiBean<ArrayList<OilerBean>>
+    suspend fun getOiler(@Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId): ApiBean<ArrayList<OilerBean>>
 
     /**
      * 设置油价
      */
     @POST("pos/oleic/updateOleic")
-    suspend fun updateOleic(@Body oil: RequestBody): ApiBean<String>
+    suspend fun updateOleic(
+        @Body oil: RequestBody,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<String>
 
 
     /**
@@ -340,13 +375,14 @@ interface Api {
 
     /**
      * 快速收银生成订单
-     * @param
+     * @param gasId 油站id
+     * @param actual 金额
      */
     @FormUrlEncoded
     @POST("pos/order/expressCashier")
     suspend fun getFastOrder(
-        @Field("gasId") gasId: Int? = 0,
-        @Field("actual") Actual: Double? = 0.00,
+        @Field("actual") actual: Double? = 0.00,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<String>
 
     /**
@@ -356,6 +392,7 @@ interface Api {
      * @param actual 支付金额
      * @param typeId 加油卡类型
      * @param gasmanid 加油员id
+     * @param gasId 油站id
      */
     @FormUrlEncoded
     @POST("my/order/card")
@@ -365,7 +402,8 @@ interface Api {
         @Field("actual") actual: Double,
         @Field("integral") integral: Int,
         @Field("typeId") typeId: Int?,
-        @Field("gasmanid") gasmanid: Int?
+        @Field("gasmanid") gasmanid: Int?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<PaySuccessBean>
 
 
@@ -375,6 +413,7 @@ interface Api {
      * @param memberPhone 会员手机号
      * @param actual 支付金额
      * @param gasmanid 加油员id
+     * @param gasId 油站id
      */
     @FormUrlEncoded
     @POST("my/order/cardPayment")
@@ -383,7 +422,8 @@ interface Api {
         @Field("memberPhone") memberPhone: String?,
         @Field("actual") actual: Double,
         @Field("integral") integral: Int,
-        @Field("gasmanid") gasmanid: Int?
+        @Field("gasmanid") gasmanid: Int?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<PaySuccessBean>
 
 
@@ -393,6 +433,7 @@ interface Api {
      * @param tradeNo 订单号
      * @param totalFee 总金额
      * @param state 类型 0 消费 1 充值 2 快速收银
+     * @param gasId 油站id
      *
      */
     @FormUrlEncoded
@@ -402,6 +443,7 @@ interface Api {
         @Field("tradeNo") tradeNo: String,
         @Field("totalFee") totalFee: Double,
         @Field("state") state: Int = 0,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<PaySuccessBean>
 
     /**
@@ -409,7 +451,10 @@ interface Api {
      * @param phone 操作员电话号
      */
     @GET("pos/getExchange")
-    suspend fun getExchange(@Query("phone") phone: String?): ApiBean<HandoverBean>
+    suspend fun getExchange(
+        @Query("phone") phone: String?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<HandoverBean>
 
 
     /**
@@ -418,7 +463,10 @@ interface Api {
      */
     @FormUrlEncoded
     @POST("pos/order/getById")
-    suspend fun getConsumeRecord(@Field("id") id: Int): ApiBean<PaySuccessBean>
+    suspend fun getConsumeRecord(
+        @Field("id") id: Int,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<PaySuccessBean>
 
     /**
      * 充值记录详情
@@ -426,13 +474,18 @@ interface Api {
      */
     @FormUrlEncoded
     @POST("pos/getById")
-    suspend fun getRechargeRecord(@Field("id") id: Int): ApiBean<PaySuccessBean>
+    suspend fun getRechargeRecord(
+        @Field("id") id: Int,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<PaySuccessBean>
 
     /**
      * 对账单
      */
     @GET("pos/user/orderToday")
-    suspend fun getOrderToday(): ApiBean<ArrayList<ReconciliationBean>>
+    suspend fun getOrderToday(
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<ArrayList<ReconciliationBean>>
 
     /**
      * 对账单搜索接口
@@ -440,7 +493,10 @@ interface Api {
      */
     @FormUrlEncoded
     @POST("pos/user/orderTodayLike")
-    suspend fun getOrderTodayLike(@Field("by") by: String = ""): ApiBean<ArrayList<ReconciliationBean>>
+    suspend fun getOrderTodayLike(
+        @Field("by") by: String = "",
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<ArrayList<ReconciliationBean>>
 
     /**
      * 对账单详情
@@ -450,14 +506,16 @@ interface Api {
     @FormUrlEncoded
     @POST("pos/user/getDetails")
     suspend fun getOrderTodayDetails(
-        @Field("id") id: Int, @Field("typeId") typeId: String?
+        @Field("id") id: Int,
+        @Field("typeId") typeId: String?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<PaySuccessBean>
 
     /**
      * 获取打印设置
      */
     @GET("admin/findTickets")
-    suspend fun getPrintSettings(): ApiBean<PrintBean>
+    suspend fun getPrintSettings(@Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId): ApiBean<PrintBean>
 
     /**
      * 修改打印设置
@@ -487,7 +545,8 @@ interface Api {
         @Field("titleStatus") titleStatus: Int?,
         @Field("twoCode") twoCode: String?,
         @Field("twoCodeStatus") twoCodeStatus: Int?,
-        @Field("typeStatus") typeStatus: Int?
+        @Field("typeStatus") typeStatus: Int?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<String>
 
 
@@ -497,7 +556,10 @@ interface Api {
      */
     @FormUrlEncoded
     @POST("pos/member/findByPhone")
-    suspend fun findByPhone(@Field("phone") phone: String): ApiBean<MemberManageBean>
+    suspend fun findByPhone(
+        @Field("phone") phone: String,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<MemberManageBean>
 
     /**
      * 交班查询密码
@@ -507,17 +569,21 @@ interface Api {
     @FormUrlEncoded
     @POST("pos/handover")
     suspend fun handover(
-        @Field("phone") phone: String?, @Field("password") passWord: String
+        @Field("phone") phone: String?,
+        @Field("password") passWord: String,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<MemberManageBean>
 
     /**
      * 获取充值活动
-     *
      * @param memberId 会员Id
      */
     @FormUrlEncoded
     @POST("rechargeDiscount/findRechargeDiscount")
-    suspend fun getRechargeActivity(@Field("memberId") memberId: Int?): ApiBean<WalletRechargeBean>
+    suspend fun getRechargeActivity(
+        @Field("memberId") memberId: Int?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<WalletRechargeBean>
 
     /**
      * 充值活动明细
@@ -528,12 +594,12 @@ interface Api {
     @POST("rechargeDiscount/getDiscountDetails")
     suspend fun getRechargeActivityDetails(
         @Field("giftId") giftId: Int?,
-        @Field("money") money: Double
+        @Field("money") money: Double,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<WalletRechargeBean>
 
     /**
      * 获取消费活动，选择最优
-     *
      * @param totalPrice 加油金额
      * @param oilId 油号id
      * @param memberId 会员id
@@ -543,7 +609,8 @@ interface Api {
     suspend fun getRefuelingDiscount(
         @Field("totalPrice") totalPrice: Double?,
         @Field("oilId") oilId: Int?,
-        @Field("memberId") memberId: Int?
+        @Field("memberId") memberId: Int?,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<CollectionDiscountBean>
 
     /**
@@ -585,7 +652,7 @@ interface Api {
         @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId,
         @Field("goodsClassifyId") goodsClassifyId: Int?,
         @Field("pageCurrent") page: Int,
-        @Field("pageSize") pageSize: Int = 20
+        @Field("pageSize") pageSize: Int = 20,
     ): RefreshApiBean<GoodsBean>
 
 
@@ -595,7 +662,10 @@ interface Api {
      */
     @Multipart
     @POST("upload/posImage")
-    suspend fun uploadImage(@Part file: MultipartBody.Part): ApiBean<String>
+    suspend fun uploadImage(
+        @Part file: MultipartBody.Part,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
+    ): ApiBean<String>
 
     /**
      * 添加商品
@@ -724,7 +794,8 @@ interface Api {
     @POST("admin/integralExchange/redemptionOfPoints")
     suspend fun giftPayment(
         @Field("goodsOrderNo") goodsOrderNo: String,
-        @Field("goods1") goodsMap: String
+        @Field("goods1") goodsMap: String,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<String>
 
     /**
@@ -736,7 +807,8 @@ interface Api {
     @POST("admin/integralExchange/universalWallet")
     suspend fun goodsCurrencyPayment(
         @Field("goodsOrderNo") goodsOrderNo: String,
-        @Field("goods1") goodsMap: String
+        @Field("goods1") goodsMap: String,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<String>
 
     /**
@@ -755,6 +827,7 @@ interface Api {
         @Field("totalFee") totalFee: Double,
         @Field("state") state: Int = 3,
         @Field("goods1") goodsMap: String,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<PaySuccessBean>
 
     /**
@@ -766,6 +839,7 @@ interface Api {
     @POST("admin/integralExchange/cashRegister")
     suspend fun goodsCashPayment(
         @Field("goodsOrderNo") goodsOrderNo: String,
-        @Field("goods1") goodsMap: String
+        @Field("goods1") goodsMap: String,
+        @Field("gasId") gasId: Int? = CommonConstant.getUserInfo()?.gasId
     ): ApiBean<String>
 }

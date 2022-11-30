@@ -1,7 +1,6 @@
 package com.tx.zygj.ui.cashier.refueling
 
 import androidx.lifecycle.MutableLiveData
-import com.llx.common.CommonConstant
 import com.llx.common.base.BaseViewModel
 import com.tx.zygj.bean.OilBean
 import com.tx.zygj.bean.OilGunBean
@@ -14,7 +13,7 @@ class RefuelingCashierViewModel : BaseViewModel() {
     val oilerBean = MutableLiveData<ArrayList<OilerBean>>()
     fun getOleice() {
         launch {
-            val data = repository.getOleice(CommonConstant.getUserInfo()?.gasId)
+            val data = repository.getOleice()
             oilBean.value = data.getData()
         }
     }
@@ -31,9 +30,9 @@ class RefuelingCashierViewModel : BaseViewModel() {
         }
     }
 
-    fun getOiler(id: Int?) {
+    fun getOiler() {
         launch {
-            val data = repository.getOiler(id)
+            val data = repository.getOiler()
             oilerBean.value = data.getData()
         }
     }
